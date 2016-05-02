@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <display-name>Tea Friend</display-name>
+
+    <servlet>
+        <servlet-name>teaServlet</servlet-name>
+        <servlet-class>org.glasma.teafriend.web.TeaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>teaServlet</servlet-name>
+        <url-pattern>/tea</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>userServlet</servlet-name>
+        <servlet-class>org.glasma.teafriend.web.UserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userServlet</servlet-name>
+        <url-pattern>/user</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>userTeaServlet</servlet-name>
+        <servlet-class>org.glasma.teafriend.web.UserTeaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userTeaServlet</servlet-name>
+        <url-pattern>/usertea</url-pattern>
+    </servlet-mapping>
+</web-app>
