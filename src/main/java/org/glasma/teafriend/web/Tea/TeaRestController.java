@@ -42,4 +42,14 @@ public class TeaRestController {
         LOG.info("update " + tea);
         service.update(tea);
     }
+
+    public Collection<Tea> getTeaByCategory(String category) {
+        LOG.info("get by category:" + category);
+        return service.getTeaByCategory(category);
+    }
+
+    public Collection<Tea> getTeaByCountry(Collection<Tea> teaList, String country) {
+        LOG.info("get by country:" + country);
+        return service.getTeaByCountry(teaList, country);
+    }
 }

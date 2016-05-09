@@ -1,5 +1,6 @@
 package org.glasma.teafriend.web;
 
+import org.glasma.teafriend.LoggedUser;
 import org.glasma.teafriend.LoggerWrapper;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,8 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int userId = Integer.valueOf(req.getParameter("userId"));
+        LoggedUser.setId(userId);
         resp.sendRedirect("user");
     }
 

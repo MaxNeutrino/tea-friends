@@ -14,6 +14,10 @@ public class Tea extends NamedEntity{
 
     public Tea(){}
 
+    public Tea(String name, String category, String country, String description){
+        this(null, name, category, country, description);
+    }
+
     public Tea(Integer id, String name, String category, String country, String description) {
         super(id, name);
         this.category = category;

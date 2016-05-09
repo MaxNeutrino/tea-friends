@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Repository
 public class InMemoryTeaRepositoryImpl implements TeaRepository {
@@ -16,11 +17,22 @@ public class InMemoryTeaRepositoryImpl implements TeaRepository {
     private AtomicInteger counter = new AtomicInteger(0);
 
     {
-        save(new Tea(1, "Молочный оолонг", "Светлый улун", "Китай", "Очень вкучный"));
-        save(new Tea(2, "Дахунпао", "Темный улун", "Китай", "Очень вкучный"));
-        save(new Tea(3, "Белая обезьяна", "Белый", "Китай", "Очень вкучный"));
-        save(new Tea(4, "Ассам Мангалам", "Черный", "Индия", "Очень вкучный"));
-        save(new Tea(5, "Мэнхай Даи", "Шен Пуэр", "Китай", "Очень вкучный"));
+        save(new Tea("Молочный оолонг", "Светлый улун", "Китай", "Очень вкусный"));
+        save(new Tea("Тегуаньинь", "Светлый улун", "Китай", "Очень вкусный"));
+        save(new Tea("Алишань улун", "Светлый улун", "Китай", "Очень вкусный"));
+        save(new Tea("Дахунпао", "Темный улун", "Китай", "Очень вкусный"));
+        save(new Tea("Белая обезьяна", "Белый", "Китай", "Очень вкусный"));
+        save(new Tea("Мень Шань Э Ча", "Зеленый", "Китай", "Очень вкусный"));
+        save(new Tea("Чжуецин", "Зеленый", "Китай", "Очень вкусный"));
+        save(new Tea("Тайпин Хоукуй", "Зеленый", "Китай", "Очень вкусный"));
+        save(new Tea("Маофен Хуан Шань", "Зеленый", "Китай", "Очень вкусный"));
+        save(new Tea("Ассам Мангалам", "Черный", "Индия", "Очень вкусный"));
+        save(new Tea("Ассам Диком", "Черный", "Индия", "Очень вкусный"));
+        save(new Tea("Дарджилинг Гопалдхара", "Черный", "Индия", "Очень вкусный"));
+        save(new Tea("Золотое руно Колхиды", "Черный", "Грузия", "Очень вкусный"));
+        save(new Tea("Золото Тапробаны", "Черный", "Цейлон", "Очень вкусный"));
+        save(new Tea("Поттотува", "Черный", "Цейлон", "Очень вкусный"));
+        save(new Tea("Мэнхай Даи", "Шен Пуэр", "Китай", "Очень вкусный"));
     }
 
     @Override
@@ -43,5 +55,19 @@ public class InMemoryTeaRepositoryImpl implements TeaRepository {
     @Override
     public Collection<Tea> getAll() {
         return repository.values();
+    }
+
+    @Override
+    public Collection<Tea> getByCategory(String category) {
+        return getAll().stream()
+                .filter(tea -> tea.getCategory().equals(category))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<Tea> getByCountry(Collection<Tea> teaList, String country) {
+        return teaList.stream()
+                .filter(tea -> tea.getCountry().equals(country))
+                .collect(Collectors.toList());
     }
 }

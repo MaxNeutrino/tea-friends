@@ -13,4 +13,8 @@ public interface TeaRepository {
     Tea get(int id);
 
     Collection<Tea> getAll();
+
+    Collection<Tea> getByCategory(String category);
+
+    Collection<Tea> getByCountry(Collection<Tea> teaList, String country);
 }
