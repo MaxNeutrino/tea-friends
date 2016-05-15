@@ -40,6 +40,20 @@ public class TeaServiceImpl implements TeaService {
     }
 
     @Override
+    public Collection<Tea> getFilteredTeaList(String category, String country) {
+        Collection<Tea> teaList;
+        if (category.equals("Все"))
+            teaList = getAll();
+        else
+            teaList = getTeaByCategory(category);
+
+        if (!country.equals("Все"))
+            teaList = getTeaByCountry(teaList, country);
+
+        return teaList;
+    }
+
+    @Override
     public Collection<Tea> getTeaByCategory(String category) {
         return repository.getByCategory(category);
     }
