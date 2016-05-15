@@ -12,25 +12,22 @@ public class User extends NamedEntity{
 
     Set<Role> roles;
 
-    boolean isEnabled;
-
     private List<Tea> drinkedTea;
 
     private List<Tea> wishTea;
 
     public User(){}
 
-    public User(int id, String login, String email, String password, boolean isEnabled, Set<Role> roles/*, List<Tea> drinkedTea*/){
+    public User(int id, String login, String email, String password, Set<Role> roles){
         super(id, login);
         this.email = email;
         this.password = password;
-        this.isEnabled = isEnabled;
         this.roles = roles;
         /*this.drinkedTea = drinkedTea;*/
     }
 
-    public User(int id, String user, String email, String pass, boolean isEnabled, Role role, Role... roles) {
-        this(id, user, email, pass, true, EnumSet.of(role, roles));
+    public User(int id, String user, String email, String pass, Role role, Role... roles) {
+        this(id, user, email, pass, EnumSet.of(role, roles));
     }
 
     public String getEmail() {
@@ -73,14 +70,6 @@ public class User extends NamedEntity{
         this.roles = roles;
     }
 
-    public boolean isEnabled() {
-        return isEnabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        isEnabled = enabled;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -88,7 +77,6 @@ public class User extends NamedEntity{
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", enabled=" + isEnabled +
                 ", roles=" + roles +
                 '}';
     }

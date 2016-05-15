@@ -4,14 +4,11 @@ import org.glasma.teafriend.LoggerWrapper;
 import org.glasma.teafriend.model.User;
 import org.glasma.teafriend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
 import java.util.Collection;
 
-@Controller
-public class UserRestController {
-
-    private final LoggerWrapper LOG = LoggerWrapper.get(UserRestController.class);
+public abstract class AbstractUserRestController {
+    private final LoggerWrapper LOG = LoggerWrapper.get(AdminRestController.class);
 
     @Autowired
     UserService service;

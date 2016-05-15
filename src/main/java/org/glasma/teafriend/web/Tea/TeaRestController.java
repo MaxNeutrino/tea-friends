@@ -52,4 +52,9 @@ public class TeaRestController {
         LOG.info("get by country:" + country);
         return service.getTeaByCountry(teaList, country);
     }
+
+    public Collection<Tea> getFilteredTeaList(String category, String country) {
+        LOG.info("get by category" + category + "& get by country:" + country);
+        return service.getFilteredTeaList(category, country);
+    }
 }
