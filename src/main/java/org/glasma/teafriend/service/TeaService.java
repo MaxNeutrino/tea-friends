@@ -16,6 +16,8 @@ public interface TeaService {
 
     Collection<Tea> getAll();
 
+    Collection<Tea> getFilteredTeaList(String category, String country);
+
     Collection<Tea> getTeaByCategory(String category);
 
     Collection<Tea> getTeaByCountry(Collection<Tea> teaList, String country);

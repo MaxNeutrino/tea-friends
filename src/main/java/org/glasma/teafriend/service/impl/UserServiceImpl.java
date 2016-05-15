@@ -3,6 +3,7 @@ package org.glasma.teafriend.service.impl;
 import org.glasma.teafriend.model.User;
 import org.glasma.teafriend.repository.UserRepository;
 import org.glasma.teafriend.service.UserService;
+import org.glasma.teafriend.util.exception.ExceptionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(int id) {
-        repository.delete(id);
+        ExceptionUtil.check(repository.delete(id), id);
     }
 
     @Override
@@ -41,6 +42,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Collection<User> getAll() {
-        return getAll();
+        return repository.getAll();
     }
 }

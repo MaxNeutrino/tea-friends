@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -57,7 +55,10 @@ public class TeaServlet extends HttpServlet {
         } else {
             String category = req.getParameter("category");
             String country = req.getParameter("country");
-            req.setAttribute("teaList", getFilteredTeaList(category, country));
+            req.setAttribute("teaList", teaRestController.getFilteredTeaList(category, country)
+                    .stream()
+                    .sorted(TEA_COMPARATOR)
+                    .collect(Collectors.toList()));
             req.getRequestDispatcher("/teaList.jsp").forward(req, resp);
         }
     }
@@ -92,20 +93,5 @@ public class TeaServlet extends HttpServlet {
     private int getId(HttpServletRequest request) {
         String paramId = Objects.requireNonNull(request.getParameter("id"));
         return Integer.valueOf(paramId);
-    }
-
-    private List<Tea> getFilteredTeaList(String category, String country) {
-        Collection<Tea> teaList;
-        if (category.equals("Все"))
-            teaList = teaRestController.getAll().stream().collect(Collectors.toList());
-        else
-            teaList = teaRestController.getTeaByCategory(category);
-
-        if (!country.equals("Все"))
-            teaList = (teaRestController.getTeaByCountry(teaList, country));
-
-        return teaList.stream()
-                .sorted(TEA_COMPARATOR)
-                .collect(Collectors.toList());
     }
 }
