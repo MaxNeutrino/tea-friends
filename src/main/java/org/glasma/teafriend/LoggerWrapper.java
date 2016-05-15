@@ -1,5 +1,6 @@
 package org.glasma.teafriend;
 
+import org.glasma.teafriend.util.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,5 +64,10 @@ public class LoggerWrapper {
     public UnsupportedOperationException getUnsupportedOperationException(String msg) {
         logger.error(msg);
         return new UnsupportedOperationException(msg);
+    }
+
+    public NotFoundException getNotFoundException(String reason) {
+        logger.error(reason);
+        return new NotFoundException(reason);
     }
 }
