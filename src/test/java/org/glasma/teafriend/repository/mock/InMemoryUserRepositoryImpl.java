@@ -1,5 +1,6 @@
 package org.glasma.teafriend.repository.mock;
 
+import org.glasma.teafriend.UserTestData;
 import org.glasma.teafriend.model.Role;
 import org.glasma.teafriend.model.User;
 import org.glasma.teafriend.repository.UserRepository;
@@ -17,9 +18,8 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
     private AtomicInteger counter = new AtomicInteger(0);
 
     {
-        save(new User(44, "user1", "mail1@gmail.com", "pass1", true, Role.ROLE_ADMIN));
-        save(new User(45, "user2admin", "mail2@gmail.com", "pass2", true, Role.ROLE_USER));
-        save(new User(46, "user3", "mail3@gmail.com", "pass3", false,  Role.ROLE_USER));
+        save(new User(UserTestData.USER_ID, "user", "mail2@gmail.com", "pass2", Role.ROLE_USER));
+        save(new User(UserTestData.ADMIN_ID, "admin", "mail3@gmail.com", "pass3", Role.ROLE_ADMIN));
     }
 
     @Override
@@ -31,7 +31,7 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
 
     @Override
     public boolean delete(int id) {
-        return repository.remove(id) != null;
+        return repository.remove(id) != null && id != 0;
     }
 
     @Override
