@@ -18,7 +18,18 @@
         </dl>
         <dl>
             <dt>Category</dt>
-            <dd><input type="text" value="${tea.category}" name="category" required="required"></dd>
+            <dd>
+                <select name="category" value="${tea.category}" required="required">
+                    <option value="Светлый улун">Светлый улун</option>
+                    <option value="Темный улун">Темный улун</option>
+                    <option value="Зеленый">Зеленый</option>
+                    <option value="Белый">Белый</option>
+                    <option value="Желтый">Желтый</option>
+                    <option value="Красный">Красный</option>
+                    <option value="Черный">Черный</option>
+                    <option value="Травяной">Травяной</option>
+                </select>
+            </dd>
         </dl>
         <dl>
             <dt>Country</dt>
