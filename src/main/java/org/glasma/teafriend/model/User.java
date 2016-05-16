@@ -1,5 +1,6 @@
 package org.glasma.teafriend.model;
 
+import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
@@ -10,7 +11,9 @@ public class User extends NamedEntity{
 
     private String password;
 
-    Set<Role> roles;
+    private Set<Role> roles;
+
+    private Date registered;
 
     private List<Tea> drinkedTea;
 
@@ -18,12 +21,11 @@ public class User extends NamedEntity{
 
     public User(){}
 
-    public User(int id, String login, String email, String password, Set<Role> roles){
-        super(id, login);
+    public User(int id, String name, String email, String password, Set<Role> roles){
+        super(id, name);
         this.email = email;
         this.password = password;
         this.roles = roles;
-        /*this.drinkedTea = drinkedTea;*/
     }
 
     public User(int id, String user, String email, String pass, Role role, Role... roles) {
@@ -68,6 +70,14 @@ public class User extends NamedEntity{
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Date getRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(Date registered) {
+        this.registered = registered;
     }
 
     @Override
