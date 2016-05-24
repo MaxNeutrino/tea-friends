@@ -13,7 +13,7 @@ import java.util.Collection;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserRepository repository;
+    private UserRepository repository;
 
     @Override
     public User save(User user) {

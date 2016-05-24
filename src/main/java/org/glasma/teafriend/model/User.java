@@ -7,19 +7,23 @@ import java.util.Set;
 
 public class User extends NamedEntity{
 
-    private String email;
+    protected String email;
 
-    private String password;
+    protected String password;
 
-    private Set<Role> roles;
+    protected Set<Role> roles;
 
-    private Date registered;
+    protected Date registered;
 
-    private List<Tea> drinkedTea;
+    protected List<Tea> drinkedTea;
 
-    private List<Tea> wishTea;
+    protected List<Tea> wishTea;
 
     public User(){}
+
+    public User(User u) {
+        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.getRoles());
+    }
 
     public User(int id, String name, String email, String password, Set<Role> roles){
         super(id, name);
