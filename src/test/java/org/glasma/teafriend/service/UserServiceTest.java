@@ -4,14 +4,14 @@ import org.glasma.teafriend.LoggerWrapper;
 import org.glasma.teafriend.UserTestData;
 import org.glasma.teafriend.model.Role;
 import org.glasma.teafriend.model.User;
-import org.glasma.teafriend.util.DbPopulator;
 import org.glasma.teafriend.util.exception.NotFoundException;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Arrays;
@@ -25,6 +25,7 @@ import static org.glasma.teafriend.UserTestData.*;
         "classpath:spring/spring-db.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
+@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 public class UserServiceTest {
 
     private static final LoggerWrapper LOG = LoggerWrapper.get(UserServiceTest.class);
@@ -32,22 +33,19 @@ public class UserServiceTest {
     @Autowired
     protected UserService service;
 
-    @Autowired
-    private DbPopulator dbPopulator;
+    /*@Autowired
+    protected DbPopulator dbPopulator;
 
     @Before
     public void setUp() throws Exception {
         dbPopulator.execute();
-    }
+    }*/
 
     @Test
     public void testSave() throws Exception {
-        TestUser tu = new TestUser(START_SEQ + 2, "New", "new@gmail.com", "newPass", Collections.singleton(Role.ROLE_USER));
+        TestUser tu = new TestUser(null, "New", "new@gmail.com", "newPass", Collections.singleton(Role.ROLE_USER));
         User created = service.save(tu.asUser());
-        LOG.debug("USER CREATED ID " + created.getId());
-        LOG.debug("USER WITH ROLE " + Collections.singleton(Role.ROLE_USER).toString());
         tu.setId(created.getId());
-        LOG.debug("CREATED USER " + tu.toString());
         MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, tu, USER), service.getAll());
     }
 
