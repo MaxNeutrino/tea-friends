@@ -1,28 +1,46 @@
 package org.glasma.teafriend.model;
 
-public class Tea extends NamedEntity{
+import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tea")
+public class Tea extends NamedEntity {
+
+    @Column(name = "category")
+    @NotEmpty
     private String category;
 
+    @Column(name = "country")
+    @NotEmpty
     private String country;
 
+    @Column(name = "country")
+    @NotEmpty
     private String description;
 
+    @Column(name = "rate")
     private int rate;
 
+    @Column(name = "count_connoisseurs")
     private int countConnoisseurs;
 
     public Tea(){}
 
     public Tea(String name, String category, String country, String description){
-        this(null, name, category, country, description);
+        this(null, name, category, country, description, 0, 0);
     }
 
-    public Tea(Integer id, String name, String category, String country, String description) {
+    public Tea(Integer id, String name, String category, String country, String description, int rate, int countConnoisseurs) {
         super(id, name);
         this.category = category;
         this.country = country;
         this.description = description;
+        this.rate = rate;
+        this.countConnoisseurs = countConnoisseurs;
     }
 
     public String getCategory() {
