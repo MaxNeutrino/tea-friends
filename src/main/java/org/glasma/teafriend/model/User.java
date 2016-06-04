@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 
 @NamedQueries({
@@ -16,7 +17,7 @@ import java.util.Set;
 })
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "unique_email")})
-public class User extends NamedEntity{
+public class User extends NamedEntity {
 
     public static final String DELETE = "User.delete";
     public static final String ALL_SORTED = "User.getAllSorted";
@@ -39,13 +40,19 @@ public class User extends NamedEntity{
     protected Set<Role> roles;
 
     @Column(name = "registered", columnDefinition = "timestamp default now()")
-    protected Date registered;
+    private Date registered;
 
-    //TODO:add drunk and wish tea lists
+    @ManyToMany
+    @JoinTable(name = "user_wish_tea",
+    joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "tea_id", referencedColumnName = "id"))
+    private List<Tea> drunkTeaList;
 
-/*    protected List<Tea> drunkTea;
-
-    protected List<Tea> wishTea;*/
+    @ManyToMany
+    @JoinTable(name = "user_drunk_tea",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tea_id", referencedColumnName = "id"))
+    private List<Tea> wishTeaList;
 
     public User(){}
 
@@ -80,21 +87,21 @@ public class User extends NamedEntity{
         this.password = password;
     }
 
-/*    public List<Tea> getDrunkTea() {
-        return drunkTea;
+    public List<Tea> getDrunkTeaList() {
+        return drunkTeaList;
     }
 
-    public void setDrunkTea(List<Tea> drinkedTea) {
-        this.drunkTea = drinkedTea;
+    public void setDrunkTeaList(List<Tea> drinkedTea) {
+        this.drunkTeaList = drinkedTea;
     }
 
-    public List<Tea> getWishTea() {
-        return wishTea;
+    public List<Tea> getWishTeaList() {
+        return wishTeaList;
     }
 
-    public void setWishTea(List<Tea> wishTea) {
-        this.wishTea = wishTea;
-    }*/
+    public void setWishTeaList(List<Tea> wishTea) {
+        this.wishTeaList = wishTea;
+    }
 
     public Set<Role> getRoles() {
         return roles;

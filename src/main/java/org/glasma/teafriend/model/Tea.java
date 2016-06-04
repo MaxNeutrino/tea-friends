@@ -2,9 +2,8 @@ package org.glasma.teafriend.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "tea")
@@ -27,6 +26,12 @@ public class Tea extends NamedEntity {
 
     @Column(name = "count_connoisseurs")
     private int countConnoisseurs;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "drunkTeaList")
+    private List<User> userDrunk;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "wishTeaList")
+    private List<User> userWish;
 
     public Tea(){}
 
