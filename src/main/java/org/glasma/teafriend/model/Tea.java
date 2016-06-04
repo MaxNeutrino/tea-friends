@@ -5,9 +5,20 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import java.util.List;
 
+@NamedQueries({
+        @NamedQuery(name = Tea.DELETE, query = "DELETE FROM Tea t WHERE t.id=:id"),
+        @NamedQuery(name = Tea.BY_CATEGORY, query = "SELECT t FROM Tea t WHERE t.category=?1"),
+        @NamedQuery(name = Tea.BY_COUNTRY, query = "SELECT t FROM Tea t WHERE t.country=?1"),
+        @NamedQuery(name = Tea.ALL_SORTED, query = "SELECT t FROM Tea t ORDER BY t.name"),
+})
 @Entity
 @Table(name = "tea")
 public class Tea extends NamedEntity {
+
+    public static final String DELETE = "Tea.delete";
+    public static final String ALL_SORTED = "Tea.getAllSorted";
+    public static final String BY_CATEGORY = "Tea.getByCategory";
+    public static final String BY_COUNTRY = "Tea.getByCountry";
 
     @Column(name = "category")
     @NotEmpty
