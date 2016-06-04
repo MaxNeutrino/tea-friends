@@ -9,6 +9,8 @@ import java.util.Objects;
 import java.util.Set;
 
 public class UserTestData {
+    private static final LoggerWrapper LOG = LoggerWrapper.get(UserTestData.class);
+
     public static final int START_SEQ = 100000;
 
     public static final int USER_ID = START_SEQ;
