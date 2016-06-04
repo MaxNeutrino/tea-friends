@@ -5,9 +5,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "comments")
-public class Comment extends BaseEntity {
+public class UserComment extends BaseEntity {
 
-    @Column(name = "created")
+    @Column(name = "created", columnDefinition = "timestamp default now()")
     private Date created;
 
     @Column(name = "message")
@@ -19,9 +19,9 @@ public class Comment extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Tea tea;
 
-    public Comment() {}
+    public UserComment() {}
 
-    public Comment(Integer id, String message) {
+    public UserComment(Integer id, String message) {
         super(id);
         this.message = message;
     }
@@ -48,5 +48,16 @@ public class Comment extends BaseEntity {
 
     public Tea getTea() {
         return tea;
+    }
+
+    @Override
+    public String toString() {
+        return "UserComment{" +
+                "id=" + id +
+                "created=" + created +
+                ", message='" + message + '\'' +
+                ", user=" + user +
+                ", tea=" + tea +
+                '}';
     }
 }
