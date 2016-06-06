@@ -45,11 +45,15 @@ public class TeaServlet extends HttpServlet {
         String action = req.getParameter("action");
         if (action == null) {
             String id = req.getParameter("id");
+            int rate = Integer.parseInt(req.getParameter("rate"));
+            int countConnoisseurs = Integer.parseInt(req.getParameter("countConnoisseurs"));
             Tea tea = new Tea(id.isEmpty() ? null : Integer.valueOf(id),
                     req.getParameter("name"),
                     req.getParameter("category"),
                     req.getParameter("country"),
-                    req.getParameter("description"));
+                    req.getParameter("description"),
+                    rate,
+                    countConnoisseurs);
             teaRestController.create(tea);
             resp.sendRedirect("tea");
         } else {

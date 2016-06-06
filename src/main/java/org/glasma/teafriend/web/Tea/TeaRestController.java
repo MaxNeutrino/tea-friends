@@ -43,16 +43,6 @@ public class TeaRestController {
         service.update(tea);
     }
 
-    public Collection<Tea> getTeaByCategory(String category) {
-        LOG.info("get by category:" + category);
-        return service.getTeaByCategory(category);
-    }
-
-    public Collection<Tea> getTeaByCountry(Collection<Tea> teaList, String country) {
-        LOG.info("get by country:" + country);
-        return service.getTeaByCountry(teaList, country);
-    }
-
     public Collection<Tea> getFilteredTeaList(String category, String country) {
         LOG.info("get by category" + category + "& get by country:" + country);
         return service.getFilteredTeaList(category, country);

@@ -3,10 +3,13 @@ package org.glasma.teafriend.service.impl;
 import org.glasma.teafriend.model.Tea;
 import org.glasma.teafriend.repository.TeaRepository;
 import org.glasma.teafriend.service.TeaService;
+import org.glasma.teafriend.util.exception.ExceptionUtil;
+import org.glasma.teafriend.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @Service
 public class TeaServiceImpl implements TeaService {
@@ -30,8 +33,8 @@ public class TeaServiceImpl implements TeaService {
     }
 
     @Override
-    public Tea get(int id) {
-        return repository.get(id);
+    public Tea get(int id) throws NotFoundException {
+        return ExceptionUtil.check(repository.get(id), id);
     }
 
     @Override
@@ -45,21 +48,14 @@ public class TeaServiceImpl implements TeaService {
         if (category.equals("Все"))
             teaList = getAll();
         else
-            teaList = getTeaByCategory(category);
+            teaList = getAll().stream()
+                    .filter(t -> t.getCategory().equals(category))
+                    .collect(Collectors.toList());
 
         if (!country.equals("Все"))
-            teaList = getTeaByCountry(teaList, country);
-
+            teaList = teaList.stream()
+                    .filter(t -> t.getCountry().equals(country))
+                    .collect(Collectors.toList());
         return teaList;
-    }
-
-    @Override
-    public Collection<Tea> getTeaByCategory(String category) {
-        return repository.getByCategory(category);
-    }
-
-    @Override
-    public Collection<Tea> getTeaByCountry(Collection<Tea> teaList, String country) {
-        return repository.getByCountry(teaList, country);
     }
 }

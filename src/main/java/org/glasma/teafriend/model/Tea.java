@@ -22,21 +22,21 @@ public class Tea extends NamedEntity {
 
     @Column(name = "category")
     @NotEmpty
-    private String category;
+    protected String category;
 
     @Column(name = "country")
     @NotEmpty
-    private String country;
+    protected String country;
 
-    @Column(name = "country")
+    @Column(name = "description")
     @NotEmpty
-    private String description;
+    protected String description;
 
     @Column(name = "rate")
-    private int rate;
+    protected int rate;
 
     @Column(name = "count_connoisseurs")
-    private int countConnoisseurs;
+    protected int countConnoisseurs;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "drunkTeaList")
     private List<User> userDrunk;
@@ -45,6 +45,11 @@ public class Tea extends NamedEntity {
     private List<User> userWish;
 
     public Tea(){}
+
+    public Tea(Tea t) {
+        this(t.getId(), t.getName(), t.getCategory(),
+                t.getCountry(), t.getDescription(), t.getRate(), t.getCountConnoisseurs());
+    }
 
     public Tea(String name, String category, String country, String description){
         this(null, name, category, country, description, 0, 0);
@@ -102,13 +107,13 @@ public class Tea extends NamedEntity {
     @Override
     public String toString() {
         return "Tea{" +
-                "id=" + id +
+                "id=" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", category='" + category + '\'' +
                 ", country='" + country + '\'' +
                 ", description='" + description + '\'' +
-                ", rate=" + rate +
-                ", countConnoisseurs=" + countConnoisseurs +
+                ", rate=" + rate + '\'' +
+                ", countConnoisseurs=" + countConnoisseurs + '\'' +
                 '}';
     }
 }

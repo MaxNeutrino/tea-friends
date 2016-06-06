@@ -1,6 +1,7 @@
 package org.glasma.teafriend.service;
 
 import org.glasma.teafriend.model.Tea;
+import org.glasma.teafriend.util.exception.NotFoundException;
 
 import java.util.Collection;
 
@@ -12,14 +13,9 @@ public interface TeaService {
 
     Tea update(Tea tea);
 
-    Tea get(int id);
+    Tea get(int id) throws NotFoundException;
 
     Collection<Tea> getAll();
 
     Collection<Tea> getFilteredTeaList(String category, String country);
-
-    Collection<Tea> getTeaByCategory(String category);
-
-    Collection<Tea> getTeaByCountry(Collection<Tea> teaList, String country);
-
 }
