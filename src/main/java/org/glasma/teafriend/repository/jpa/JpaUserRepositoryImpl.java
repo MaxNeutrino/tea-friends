@@ -1,5 +1,6 @@
 package org.glasma.teafriend.repository.jpa;
 
+import org.glasma.teafriend.model.Tea;
 import org.glasma.teafriend.model.User;
 import org.glasma.teafriend.repository.UserRepository;
 import org.springframework.stereotype.Repository;
@@ -46,5 +47,17 @@ public class JpaUserRepositoryImpl implements UserRepository {
     @Override
     public List<User> getAll() {
         return em.createNamedQuery(User.ALL_SORTED, User.class).getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void saveWishTeaList(int id, List<Tea> wishList) {
+        get(id).setWishTeaList(wishList);
+    }
+
+    @Override
+    @Transactional
+    public void saveDrunkTeaList(int id, List<Tea> drunkList) {
+        get(id).setDrunkTeaList(drunkList);
     }
 }

@@ -1,5 +1,7 @@
 package org.glasma.teafriend.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -39,9 +41,11 @@ public class Tea extends NamedEntity {
     protected int countConnoisseurs;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "drunkTeaList")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<User> userDrunk;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "wishTeaList")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<User> userWish;
 
     public Tea(){}
@@ -102,6 +106,22 @@ public class Tea extends NamedEntity {
 
     public void setCountConnoisseurs(int countConnoisseurs) {
         this.countConnoisseurs = countConnoisseurs;
+    }
+
+    public List<User> getUserDrunk() {
+        return userDrunk;
+    }
+
+    public void setUserDrunk(List<User> userDrunk) {
+        this.userDrunk = userDrunk;
+    }
+
+    public List<User> getUserWish() {
+        return userWish;
+    }
+
+    public void setUserWish(List<User> userWish) {
+        this.userWish = userWish;
     }
 
     @Override

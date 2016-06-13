@@ -1,5 +1,7 @@
 package org.glasma.teafriend.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -46,12 +48,14 @@ public class User extends NamedEntity {
     @JoinTable(name = "user_wish_tea",
     joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "tea_id", referencedColumnName = "id"))
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Tea> drunkTeaList;
 
     @ManyToMany
     @JoinTable(name = "user_drunk_tea",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "tea_id", referencedColumnName = "id"))
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Tea> wishTeaList;
 
     public User(){}

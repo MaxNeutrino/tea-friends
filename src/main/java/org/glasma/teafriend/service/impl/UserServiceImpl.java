@@ -1,5 +1,6 @@
 package org.glasma.teafriend.service.impl;
 
+import org.glasma.teafriend.model.Tea;
 import org.glasma.teafriend.model.User;
 import org.glasma.teafriend.repository.UserRepository;
 import org.glasma.teafriend.service.UserService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -44,5 +46,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public Collection<User> getAll() {
         return repository.getAll();
+    }
+
+    @Override
+    public List<Tea> getWishTeaList(int id) {
+        return get(id).getWishTeaList();
+    }
+
+    @Override
+    public void saveWishTeaList(int id, List<Tea> wishList) {
+        repository.saveWishTeaList(id, wishList);
+    }
+
+    @Override
+    public List<Tea> getDrunkTeaList(int id) {
+        return get(id).getDrunkTeaList();
+    }
+
+    @Override
+    public void saveDrunkTeaList(int id, List<Tea> drunkTea) {
+        repository.saveDrunkTeaList(id, drunkTea);
     }
 }

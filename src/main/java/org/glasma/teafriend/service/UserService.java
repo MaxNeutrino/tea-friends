@@ -1,9 +1,11 @@
 package org.glasma.teafriend.service;
 
+import org.glasma.teafriend.model.Tea;
 import org.glasma.teafriend.model.User;
 import org.glasma.teafriend.util.exception.NotFoundException;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface UserService {
 
@@ -18,4 +20,12 @@ public interface UserService {
     User getByEmail(String email) throws NotFoundException;
 
     Collection<User> getAll();
+
+    List<Tea> getWishTeaList(int id);
+
+    void saveWishTeaList(int id, List<Tea> wishList);
+
+    List<Tea> getDrunkTeaList(int id);
+
+    void saveDrunkTeaList(int id, List<Tea> drunkTea);
 }
