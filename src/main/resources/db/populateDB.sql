@@ -21,3 +21,7 @@ INSERT INTO tea (name, category, country, description, rate, count_connoisseurs)
 INSERT INTO comments (created, message, user_id, tea_id) VALUES
   ('2016-06-12 10:00:00', 'Это жемчужина чаев', '100000', '100003'),
   ('2016-06-11 08:00:00', 'Самый лучший чай', '100000', '100002');
+
+INSERT INTO tea_rate (rate, user_id, tea_id) VALUES
+  ('5', '100000', '100003'),
+  ('5', '100001', '100003');

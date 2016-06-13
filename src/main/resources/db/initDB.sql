@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS tea CASCADE;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS user_wish_tea;
 DROP TABLE IF EXISTS user_drunk_tea;
+DROP TABLE IF EXISTS tea_rate;
 DROP SEQUENCE IF EXISTS global_seq;
 
 CREATE SEQUENCE global_seq START 100000;
@@ -65,4 +66,14 @@ CREATE TABLE user_drunk_tea
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
   FOREIGN KEY (tea_id) REFERENCES tea (id) ON DELETE CASCADE,
   CONSTRAINT drunk_tea_pkey PRIMARY KEY (user_id, tea_id)
+);
+
+CREATE TABLE tea_rate
+(
+  id INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  rate INTEGER NOT NULL,
+  user_id INTEGER NOT NULL,
+  tea_id INTEGER NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+  FOREIGN KEY (tea_id) REFERENCES tea (id) ON DELETE CASCADE
 )
