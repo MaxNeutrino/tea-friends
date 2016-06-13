@@ -56,7 +56,7 @@ public class JpaUserCommentRepository implements UserCommentRepository {
     @Override
     @Transactional
     public boolean delete(int id) {
-        return em.createNamedQuery(UserComment.DELETE, UserComment.class)
+        return em.createNamedQuery(UserComment.DELETE)
                 .setParameter("id", id)
                 .executeUpdate() != 0;
     }
