@@ -1,6 +1,7 @@
 package org.glasma.teafriend;
 
 import org.glasma.teafriend.matcher.ModelMatcher;
+import org.glasma.teafriend.model.BaseEntity;
 import org.glasma.teafriend.model.Role;
 import org.glasma.teafriend.model.User;
 
@@ -9,12 +10,9 @@ import java.util.Objects;
 import java.util.Set;
 
 public class UserTestData {
-    private static final LoggerWrapper LOG = LoggerWrapper.get(UserTestData.class);
 
-    public static final int START_SEQ = 100000;
-
-    public static final int USER_ID = START_SEQ;
-    public static final int ADMIN_ID = START_SEQ + 1;
+    public static final int USER_ID = BaseEntity.START_SEQ;
+    public static final int ADMIN_ID = BaseEntity.START_SEQ + 1;
 
     public static final User USER = new User(USER_ID, "User", "user@gmail.com", "password", Role.ROLE_USER);
     public static final User ADMIN = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", Role.ROLE_ADMIN);
