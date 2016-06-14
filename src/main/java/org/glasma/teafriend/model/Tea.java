@@ -12,6 +12,7 @@ import java.util.List;
         @NamedQuery(name = Tea.BY_CATEGORY, query = "SELECT t FROM Tea t WHERE t.category=?1"),
         @NamedQuery(name = Tea.BY_COUNTRY, query = "SELECT t FROM Tea t WHERE t.country=?1"),
         @NamedQuery(name = Tea.ALL_SORTED, query = "SELECT t FROM Tea t ORDER BY t.name"),
+        @NamedQuery(name = Tea.BY_NAME, query = "SELECT t FROM Tea t WHERE t.name=:name"),
 })
 @Entity
 @Table(name = "tea")
@@ -21,6 +22,7 @@ public class Tea extends NamedEntity {
     public static final String ALL_SORTED = "Tea.getAllSorted";
     public static final String BY_CATEGORY = "Tea.getByCategory";
     public static final String BY_COUNTRY = "Tea.getByCountry";
+    public static final String BY_NAME = "Tea.getByName";
 
     @Column(name = "category")
     @NotEmpty

@@ -15,6 +15,8 @@ public interface TeaService {
 
     Tea get(int id) throws NotFoundException;
 
+    Collection<Tea> getByName(String name);
+
     Collection<Tea> getAll();
 
     Collection<Tea> getFilteredTeaList(String category, String country);

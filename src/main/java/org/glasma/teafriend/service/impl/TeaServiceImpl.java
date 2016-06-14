@@ -38,6 +38,11 @@ public class TeaServiceImpl implements TeaService {
     }
 
     @Override
+    public Collection<Tea> getByName(String name) {
+        return repository.getByName(name);
+    }
+
+    @Override
     public Collection<Tea> getAll() {
         return repository.getAll();
     }

@@ -39,6 +39,11 @@ public class JpaTeaRepositoryImpl implements TeaRepository {
     }
 
     @Override
+    public Collection<Tea> getByName(String name) {
+        return em.createNamedQuery(Tea.BY_NAME, Tea.class).setParameter("name", name).getResultList();
+    }
+
+    @Override
     public Collection<Tea> getAll() {
         return em.createNamedQuery(Tea.ALL_SORTED, Tea.class).getResultList();
     }

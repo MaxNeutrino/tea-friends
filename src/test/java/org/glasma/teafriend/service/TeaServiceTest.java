@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
@@ -56,6 +57,12 @@ public class TeaServiceTest {
     public void testGet() {
         Tea tea = service.get(TeaTestData.WHITE_TEA_ID);
         TeaTestData.MATCHER.assertEquals(tea, TeaTestData.WHITE);
+    }
+
+    @Test
+    public void testGetByName() {
+        List<Tea> tea = (List<Tea>) service.getByName(TeaTestData.WHITE.getName());
+        TeaTestData.MATCHER.assertEquals(tea.get(0), TeaTestData.WHITE);
     }
 
     @Test(expected = NotFoundException.class)
