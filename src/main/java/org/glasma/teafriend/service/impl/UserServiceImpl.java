@@ -89,17 +89,22 @@ public class UserServiceImpl implements UserService {
     public void setTeaToDrunkTeaList(int userId, int drunkTeaId, int rate) {
         Tea tea = teaRepository.get(drunkTeaId);
 
-        TeaRate teaRate = new TeaRate(rate, repository.get(userId), tea);
-        rateRepository.setRate(teaRate, userId, drunkTeaId);
+        if (isFindInDrunkList(userId, drunkTeaId)){
+            TeaRate teaRate = rateRepository.get(userId, drunkTeaId);
+            teaRate.setRate(rate);
+            rateRepository.setRate(teaRate, userId, drunkTeaId);
+        } else {
+            moveTeaFromWish(userId, drunkTeaId);
 
-        List<Tea> drunkTea = getDrunkTeaList(userId);
-        drunkTea.add(tea);
-        repository.saveDrunkTeaList(userId, drunkTea);
-        int countConnoisseurs = tea.getCountConnoisseurs() + 1;
+            TeaRate teaRate = new TeaRate(rate, repository.get(userId), tea);
+            rateRepository.setRate(teaRate, userId, drunkTeaId);
 
+            List<Tea> drunkTea = getDrunkTeaList(userId);
+            drunkTea.add(tea);
+            repository.saveDrunkTeaList(userId, drunkTea);
+        }
 
-        tea.setRate(calculateMiddleRate(drunkTeaId, countConnoisseurs));
-        tea.setCountConnoisseurs(countConnoisseurs);
+        tea.setRate(calculateMiddleRate(drunkTeaId));
         teaRepository.save(tea);
     }
 
@@ -107,9 +112,7 @@ public class UserServiceImpl implements UserService {
     public void removeTeaFromDrunkTeaList(int userId, int drunkTeaId) {
         rateRepository.delete(rateRepository.get(userId, drunkTeaId).getId());
         Tea tea = teaRepository.get(drunkTeaId);
-        int countConnoisseurs = tea.getCountConnoisseurs() - 1;
-        tea.setRate(calculateMiddleRate(drunkTeaId, countConnoisseurs));
-        tea.setCountConnoisseurs(countConnoisseurs);
+        tea.setRate(calculateMiddleRate(drunkTeaId));
         tea = teaRepository.save(tea);
 
         List<Tea> drunkTea = getDrunkTeaList(userId);
@@ -118,9 +121,23 @@ public class UserServiceImpl implements UserService {
         repository.saveDrunkTeaList(userId, drunkTea);
     }
 
-    private double calculateMiddleRate(int teaId, int countConnoisseurs) {
+    private double calculateMiddleRate(int teaId) {
         List<TeaRate> teaRateList = rateRepository.getAllByTea(teaId);
-        double userSumRate = teaRateList.stream().collect(Collectors.summingInt(TeaRate::getRate));
-        return userSumRate / (double) countConnoisseurs;
+        return teaRateList.stream().collect(Collectors.averagingInt(TeaRate::getRate));
+    }
+
+    private void moveTeaFromWish(int userId, int teaId) {
+        List<Tea> wishList = getWishTeaList(userId);
+        if (wishList.size() > 0) {
+            List<Tea> teas = wishList.stream().filter(t -> t.equals(teaRepository.get(teaId)))
+                    .collect(Collectors.toList());
+            if (teas.size() > 0)
+                removeTeaFromWishTeaList(userId, teaId);
+        }
+    }
+
+    private boolean isFindInDrunkList(int userId, int teaId){
+        List<Tea> drunks = getDrunkTeaList(userId);
+        return drunks.stream().filter(t -> t.equals(teaRepository.get(teaId))).count() > 0;
     }
 }
