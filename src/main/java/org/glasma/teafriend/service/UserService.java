@@ -23,9 +23,13 @@ public interface UserService {
 
     List<Tea> getWishTeaList(int id);
 
-    void saveWishTeaList(int id, List<Tea> wishList);
+    void saveWishTeaList(int id, int teaId);
+
+    void removeTeaFromWishTeaList(int userId, int teaId);
 
     List<Tea> getDrunkTeaList(int id);
 
-    void saveDrunkTeaList(int id, List<Tea> drunkTea);
+    void setTeaToDrunkTeaList(int userId, int drunkTeaId, int rate);
+
+    void removeTeaFromDrunkTeaList(int userId, int drunkTeaId);
 }

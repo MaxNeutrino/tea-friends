@@ -8,6 +8,8 @@ public interface TeaRateRepository {
 
     TeaRate setRate(TeaRate rate, int userId, int teaId);
 
+    TeaRate get(int userId, int teaId);
+
     boolean delete(int id);
 
     boolean deleteAll(int teaId);

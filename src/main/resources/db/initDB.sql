@@ -35,7 +35,7 @@ CREATE TABLE tea
   category VARCHAR NOT NULL,
   country VARCHAR NOT NULL,
   description VARCHAR NOT NULL,
-  rate INTEGER,
+  rate REAL,
   count_connoisseurs INTEGER
 );
 

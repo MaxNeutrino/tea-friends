@@ -35,7 +35,7 @@ public class Tea extends NamedEntity {
     protected String description;
 
     @Column(name = "rate")
-    protected int rate;
+    protected double rate;
 
     @Column(name = "count_connoisseurs")
     protected int countConnoisseurs;
@@ -59,7 +59,7 @@ public class Tea extends NamedEntity {
         this(null, name, category, country, description, 0, 0);
     }
 
-    public Tea(Integer id, String name, String category, String country, String description, int rate, int countConnoisseurs) {
+    public Tea(Integer id, String name, String category, String country, String description, double rate, int countConnoisseurs) {
         super(id, name);
         this.category = category;
         this.country = country;
@@ -92,11 +92,11 @@ public class Tea extends NamedEntity {
         this.description = description;
     }
 
-    public int getRate() {
+    public double getRate() {
         return rate;
     }
 
-    public void setRate(int rate) {
+    public void setRate(double rate) {
         this.rate = rate;
     }
 

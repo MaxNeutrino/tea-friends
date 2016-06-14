@@ -22,7 +22,7 @@ public class TeaTestData {
     public static final Tea WHITE = new Tea(WHITE_TEA_ID,
             "Баймаохоу", "Белый", "Китай", "Очень вкусный", 0, 0);
     public static final Tea ULUN = new Tea(ULUN_TEA_ID,
-            "Молочный улун", "Светлый улун", "Китай", "Очень вкусный", 0, 0);
+            "Молочный улун", "Светлый улун", "Китай", "Очень вкусный", 0, 2);
     public static final Tea BLACK = new Tea(BLACK_TEA_ID,
             "Ассам Мангалам", "Черный", "Индия", "Очень вкусный", 0, 0);
 
@@ -42,7 +42,7 @@ public class TeaTestData {
         }
 
         public TestTea(Integer id, String name, String category,
-                       String country, String description, int rate, int countConnoisseurs){
+                       String country, String description, double rate, int countConnoisseurs){
             super(id, name, category, country, description, rate, countConnoisseurs);
         }
 

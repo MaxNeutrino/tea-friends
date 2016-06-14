@@ -15,7 +15,7 @@ INSERT INTO user_roles (role, user_id) VALUES ('ROLE_ADMIN', 100001);
 
 INSERT INTO tea (name, category, country, description, rate, count_connoisseurs) VALUES
   ('Баймаохоу', 'Белый', 'Китай', 'Очень вкусный', 0, 0),
-  ('Молочный улун', 'Светлый улун', 'Китай', 'Очень вкусный', 0, 0),
+  ('Молочный улун', 'Светлый улун', 'Китай', 'Очень вкусный', 0, 2),
   ('Ассам Мангалам', 'Черный', 'Индия', 'Очень вкусный', 0, 0);
 
 INSERT INTO comments (created, message, user_id, tea_id) VALUES

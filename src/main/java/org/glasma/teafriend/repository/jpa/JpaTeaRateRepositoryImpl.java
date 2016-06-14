@@ -35,6 +35,14 @@ public class JpaTeaRateRepositoryImpl implements TeaRateRepository {
     }
 
     @Override
+    public TeaRate get(int userId, int teaId) {
+        return em.createNamedQuery(TeaRate.GET, TeaRate.class)
+                .setParameter("teaId", teaId)
+                .setParameter("userId", userId)
+                .getSingleResult();
+    }
+
+    @Override
     public List<TeaRate> getAllByTea(int teaId) {
         return em.createNamedQuery(TeaRate.ALL_SORTED, TeaRate.class)
                 .setParameter("teaId", teaId)

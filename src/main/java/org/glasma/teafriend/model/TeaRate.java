@@ -3,6 +3,7 @@ package org.glasma.teafriend.model;
 import javax.persistence.*;
 
 @NamedQueries({
+        @NamedQuery(name = TeaRate.GET, query = "SELECT r FROM TeaRate r WHERE r.tea.id=:teaId AND r.user.id=:userId"),
         @NamedQuery(name = TeaRate.DELETE, query = "DELETE FROM TeaRate r WHERE r.id=:id"),
         @NamedQuery(name = TeaRate.DELETE_ALL, query = "DELETE FROM TeaRate r WHERE r.tea.id=:teaId"),
         @NamedQuery(name = TeaRate.ALL_SORTED, query = "SELECT r FROM TeaRate r WHERE r.tea.id=:teaId ORDER BY r.rate DESC"),
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "tea_rate")
 public class TeaRate extends BaseEntity {
 
+    public static final String GET = "TeaRate.get";
     public static final String DELETE = "TeaRate.delete";
     public static final String DELETE_ALL = "TeaRate.deleteALL";
     public static final String ALL_SORTED = "TeaRate.getAllByTea";

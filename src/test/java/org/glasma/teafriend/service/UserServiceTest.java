@@ -4,7 +4,6 @@ import org.glasma.teafriend.LoggerWrapper;
 import org.glasma.teafriend.TeaTestData;
 import org.glasma.teafriend.UserTestData;
 import org.glasma.teafriend.model.Role;
-import org.glasma.teafriend.model.Tea;
 import org.glasma.teafriend.model.User;
 import org.glasma.teafriend.util.exception.NotFoundException;
 import org.junit.Assert;
@@ -17,7 +16,9 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 import static org.glasma.teafriend.UserTestData.*;
 
@@ -104,26 +105,30 @@ public class UserServiceTest {
     @Test
     public void testWishList() {
         User user = userService.get(USER_ID);
-        List<Tea> wishList = user.getWishTeaList();
-        if (wishList == null)
-            wishList = new ArrayList<>();
-        wishList.add(TeaTestData.WHITE);
-        userService.saveWishTeaList(user.getId(), wishList);
+        userService.saveWishTeaList(user.getId(), TeaTestData.WHITE_TEA_ID);
 
         User user1 = teaService.get(TeaTestData.WHITE_TEA_ID).getUserWish().get(0);
         Assert.assertEquals(user, user1);
+
+        userService.removeTeaFromWishTeaList(user.getId(), TeaTestData.WHITE_TEA_ID);
+        Assert.assertEquals(user.getWishTeaList().size(), 0);
     }
 
     @Test
     public void testDrunkList() {
-        User user = userService.get(USER_ID);
-        List<Tea> drunkTea = user.getDrunkTeaList();
-        if (drunkTea == null)
-            drunkTea = new ArrayList<>();
-        drunkTea.add(TeaTestData.ULUN);
-        userService.saveDrunkTeaList(user.getId(), drunkTea);
+        double DELTA = 1e-15;
 
-        User user1 = teaService.get(TeaTestData.ULUN_TEA_ID).getUserDrunk().get(0);
-        Assert.assertEquals(user, user1);
+        User u = new User(null, "New", "new@gmail.com", "newPass", Collections.singleton(Role.ROLE_USER));
+        User created = userService.save(u);
+
+        userService.setTeaToDrunkTeaList(created.getId(), TeaTestData.ULUN_TEA_ID, 4);
+
+        User user = teaService.get(TeaTestData.ULUN_TEA_ID).getUserDrunk().get(0);
+        Assert.assertEquals(u, user);
+        Assert.assertEquals(teaService.get(TeaTestData.ULUN_TEA_ID).getRate(), 4.66666651, DELTA);
+
+        userService.removeTeaFromDrunkTeaList(created.getId(), TeaTestData.ULUN_TEA_ID);
+        Assert.assertEquals(teaService.get(TeaTestData.ULUN_TEA_ID).getUserDrunk().size(), 0);
+        Assert.assertEquals(teaService.get(TeaTestData.ULUN_TEA_ID).getRate(), 5.0, DELTA);
     }
 }
