@@ -20,4 +20,6 @@ public interface TeaService {
     Collection<Tea> getAll();
 
     Collection<Tea> getFilteredTeaList(String category, String country);
+
+    void evictCache();
 }

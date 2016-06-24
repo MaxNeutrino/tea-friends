@@ -4,9 +4,11 @@ import org.glasma.teafriend.LoggerWrapper;
 import org.glasma.teafriend.TeaTestData;
 import org.glasma.teafriend.model.Tea;
 import org.glasma.teafriend.util.exception.NotFoundException;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
@@ -17,10 +19,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import static org.glasma.teafriend.Profiles.POSTGRES;
+
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml"
 })
+@ActiveProfiles(POSTGRES)
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 public class TeaServiceTest {
@@ -29,6 +34,11 @@ public class TeaServiceTest {
 
     @Autowired
     protected TeaService service;
+
+    @Before
+    public void setUp() throws Exception {
+        service.evictCache();
+    }
 
     @Test
     public void testSave() {

@@ -18,16 +18,19 @@ public class TeaServiceImpl implements TeaService {
     TeaRepository repository;
 
     @Override
+    //@CacheEvict(value = "teas", allEntries = true)
     public Tea save(Tea tea) {
         return repository.save(tea);
     }
 
     @Override
+    //@CacheEvict(value = "teas", allEntries = true)
     public void delete(int id) {
         repository.delete(id);
     }
 
     @Override
+    //@CacheEvict(value = "teas", allEntries = true)
     public Tea update(Tea tea) {
         return repository.save(tea);
     }
@@ -43,6 +46,7 @@ public class TeaServiceImpl implements TeaService {
     }
 
     @Override
+    //@Cacheable("teas")
     public Collection<Tea> getAll() {
         return repository.getAll();
     }
@@ -62,5 +66,11 @@ public class TeaServiceImpl implements TeaService {
                     .filter(t -> t.getCountry().equals(country))
                     .collect(Collectors.toList());
         return teaList;
+    }
+
+    @Override
+    //@CacheEvict(value = "teas", allEntries = true)
+    public void evictCache() {
+
     }
 }

@@ -32,4 +32,6 @@ public interface UserService {
     void setTeaToDrunkTeaList(int userId, int drunkTeaId, int rate);
 
     void removeTeaFromDrunkTeaList(int userId, int drunkTeaId);
+
+    void evictCache();
 }

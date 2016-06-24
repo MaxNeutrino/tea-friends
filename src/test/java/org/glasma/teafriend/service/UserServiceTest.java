@@ -7,6 +7,7 @@ import org.glasma.teafriend.model.Role;
 import org.glasma.teafriend.model.User;
 import org.glasma.teafriend.util.exception.NotFoundException;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,11 @@ public class UserServiceTest {
 
     @Autowired
     protected TeaService teaService;
+
+    @Before
+    public void setUp() throws Exception {
+        userService.evictCache();
+    }
 
     /*@Autowired
     protected DbPopulator dbPopulator;

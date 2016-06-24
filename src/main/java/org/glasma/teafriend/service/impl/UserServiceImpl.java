@@ -11,6 +11,8 @@ import org.glasma.teafriend.service.UserService;
 import org.glasma.teafriend.util.exception.ExceptionUtil;
 import org.glasma.teafriend.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -32,16 +34,19 @@ public class UserServiceImpl implements UserService {
     private TeaRateRepository rateRepository;
 
     @Override
+    @CacheEvict(value = "users", allEntries = true)
     public User save(User user) {
         return repository.save(user);
     }
 
     @Override
+    @CacheEvict(value = "users", allEntries = true)
     public void delete(int id) {
         ExceptionUtil.check(repository.delete(id), id);
     }
 
     @Override
+    @CacheEvict(value = "users", allEntries = true)
     public User update(User user) {
         return repository.save(user);
     }
@@ -57,6 +62,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable("users")
     public Collection<User> getAll() {
         return repository.getAll();
     }
@@ -119,6 +125,12 @@ public class UserServiceImpl implements UserService {
         drunkTea.remove(tea);
 
         repository.saveDrunkTeaList(userId, drunkTea);
+    }
+
+    @Override
+    @CacheEvict(value = "users", allEntries = true)
+    public void evictCache() {
+
     }
 
     private double calculateMiddleRate(int teaId) {
