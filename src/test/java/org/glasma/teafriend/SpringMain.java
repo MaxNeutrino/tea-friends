@@ -1,18 +1,21 @@
 package org.glasma.teafriend;
 
 import org.glasma.teafriend.model.Tea;
-import org.glasma.teafriend.web.Tea.TeaRestController;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.glasma.teafriend.web.tea.TeaRestController;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.util.Arrays;
 
 public class SpringMain {
     public static void main(String[] args) {
-        try(ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml")) {
+        try(GenericXmlApplicationContext appCtx = new GenericXmlApplicationContext()) {
+            appCtx.getEnvironment().setActiveProfiles(Profiles.POSTGRES, Profiles.JPA);
+            appCtx.load("spring/spring-app.xml", "spring/spring-db.xml");
+            appCtx.refresh();
+
             System.out.println(Arrays.toString(appCtx.getBeanDefinitionNames()));
             TeaRestController teaRestController = appCtx.getBean(TeaRestController.class);
-            teaRestController.create(new Tea(12, "Молочный оолонг", "Светлый улун", "Китай", "Очень вкусный"));
+            teaRestController.create(new Tea(12, "Молочный оолонг", "Светлый улун", "Китай", "Очень вкусный", 0, 0));
             System.out.println();
         }
     }

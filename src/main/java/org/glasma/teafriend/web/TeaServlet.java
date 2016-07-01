@@ -1,9 +1,9 @@
 package org.glasma.teafriend.web;
 
 import org.glasma.teafriend.LoggerWrapper;
+import org.glasma.teafriend.Profiles;
 import org.glasma.teafriend.model.Tea;
-import org.glasma.teafriend.web.Tea.TeaRestController;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.glasma.teafriend.web.tea.TeaRestController;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.servlet.ServletConfig;
@@ -22,13 +22,16 @@ public class TeaServlet extends HttpServlet {
 
     public static final Comparator<Tea> TEA_COMPARATOR = (tea1, tea2) -> tea1.getName().compareTo(tea2.getName());
 
-    private ConfigurableApplicationContext springContext;
+    private ClassPathXmlApplicationContext springContext;
     private TeaRestController teaRestController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        springContext = new ClassPathXmlApplicationContext();
+        springContext.getEnvironment().setActiveProfiles(Profiles.POSTGRES, Profiles.JPA);
+        springContext.setConfigLocations("spring/spring-app.xml", "spring/spring-db.xml");
+        springContext.refresh();
         teaRestController = springContext.getBean(TeaRestController.class);
     }
 
