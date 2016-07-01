@@ -5,6 +5,7 @@ import org.glasma.teafriend.TeaTestData;
 import org.glasma.teafriend.UserTestData;
 import org.glasma.teafriend.model.Role;
 import org.glasma.teafriend.model.User;
+import org.glasma.teafriend.repository.JpaUtil;
 import org.glasma.teafriend.util.exception.NotFoundException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -42,9 +43,13 @@ public class UserServiceTest {
     @Autowired
     protected TeaService teaService;
 
+    @Autowired
+    private JpaUtil jpaUtil;
+
     @Before
     public void setUp() throws Exception {
         userService.evictCache();
+        jpaUtil.clear2ndLevelHibernateCache();
     }
 
     /*@Autowired

@@ -35,4 +35,10 @@
            diskExpiryThreadIntervalSeconds="1"
            memoryStoreEvictionPolicy="LRU"/>
 
+    <cache name="org.glasma.teafriend.model.User"
+           maxElementsInMemory="25000"/>
+
+    <cache name="org.glasma.teafriend.model.Tea"
+           maxElementsInMemory="25000"/>
+
 </ehcache>

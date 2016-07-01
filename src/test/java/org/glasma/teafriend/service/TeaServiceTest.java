@@ -3,6 +3,7 @@ package org.glasma.teafriend.service;
 import org.glasma.teafriend.LoggerWrapper;
 import org.glasma.teafriend.TeaTestData;
 import org.glasma.teafriend.model.Tea;
+import org.glasma.teafriend.repository.JpaUtil;
 import org.glasma.teafriend.util.exception.NotFoundException;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,9 +36,13 @@ public class TeaServiceTest {
     @Autowired
     protected TeaService service;
 
+    @Autowired
+    private JpaUtil jpaUtil;
+
     @Before
     public void setUp() throws Exception {
         service.evictCache();
+        jpaUtil.clear2ndLevelHibernateCache();
     }
 
     @Test

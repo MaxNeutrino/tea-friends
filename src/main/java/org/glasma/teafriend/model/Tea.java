@@ -1,5 +1,7 @@
 package org.glasma.teafriend.model;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -16,6 +18,7 @@ import java.util.List;
 })
 @Entity
 @Table(name = "tea")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Tea extends NamedEntity {
 
     public static final String DELETE = "Tea.delete";
