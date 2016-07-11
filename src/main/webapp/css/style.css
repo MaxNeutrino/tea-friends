@@ -20,3 +20,11 @@ form section {
     margin: 8px 0;
     padding: 0;
 }
+
+header, footer {
+    background: none repeat scroll 0 0 #CCFF90;
+    color: #B2FF59;
+    font-size: 20px;
+    padding: 5px 20px;
+    margin: 6px 0;
+}

@@ -4,6 +4,6 @@
     <title>UserTeaList</title>
 </head>
 <body>
-<h2><a href="index.html">Home</a></h2>
+<h2><a href="index.jsp">Home</a></h2>
 </body>
 </html>

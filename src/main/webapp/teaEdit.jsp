@@ -7,7 +7,7 @@
 </head>
 <body>
 <section>
-    <h2><a href="index.html">Home</a></h2>
+    <h2><a href="index.jsp">Home</a></h2>
     <h3>TeaEdit</h3>
     <jsp:useBean id="tea" type="org.glasma.teafriend.model.Tea" scope="request"/>
     <form method="post" action="tea">

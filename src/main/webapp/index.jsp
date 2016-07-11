@@ -1,11 +1,13 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<fmt:setBundle basename="messages.app"/>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Tea Friends</title>
-  </head>
+<jsp:include page="fragments/headTag.jsp"/>
   <body>
+  <jsp:include page="fragments/bodyHeader.jsp"/>
+
     <h2>Социальная сеть для чаеманов Tea Friends</h2>
     <hr/>
     <form method="post" action="user">
@@ -17,5 +19,7 @@
     </form>
     <h3><a href="tea">TeaList</a> </h3>
     <h3><a href="user">UserList</a> </h3>
+
+  <jsp:include page="fragments/footer.jsp"/>
   </body>
 </html>

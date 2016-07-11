@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h2><a href="index.html">Home</a></h2>
+<h2><a href="index.jsp">Home</a></h2>
 <h3>TeaList</h3>
 <form method="post" action="tea?action=filter">
     <section>
