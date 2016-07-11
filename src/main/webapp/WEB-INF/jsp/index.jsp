@@ -2,11 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<fmt:setBundle basename="messages.app"/>
 <html>
-<jsp:include page="../../fragments/headTag.jsp"/>
+<jsp:include page="fragments/headTag.jsp"/>
   <body>
-  <jsp:include page="../../fragments/bodyHeader.jsp"/>
+  <jsp:include page="fragments/bodyHeader.jsp"/>
 
     <h2>Социальная сеть для чаеманов Tea Friends</h2>
     <hr/>
@@ -20,6 +19,6 @@
     <h3><a href="tea">TeaList</a> </h3>
     <h3><a href="user">UserList</a> </h3>
 
-  <jsp:include page="../../fragments/footer.jsp"/>
+  <jsp:include page="fragments/footer.jsp"/>
   </body>
 </html>
