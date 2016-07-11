@@ -10,7 +10,4 @@
     <context:annotation-config/>
 
     <context:component-scan base-package="org.glasma.**.service"/>
-    <context:component-scan base-package="org.glasma.**.web"/>
-
-
 </beans>
