@@ -3,7 +3,7 @@ package org.glasma.teafriend.service;
 import org.glasma.teafriend.LoggerWrapper;
 import org.glasma.teafriend.TeaTestData;
 import org.glasma.teafriend.model.Tea;
-import org.glasma.teafriend.repository.JpaUtil;
+import org.glasma.teafriend.util.JpaUtil;
 import org.glasma.teafriend.util.exception.NotFoundException;
 import org.junit.Before;
 import org.junit.Test;
