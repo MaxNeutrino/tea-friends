@@ -20,6 +20,7 @@ public class JpaTeaRepositoryImpl implements TeaRepository {
     @Transactional
     public Tea save(Tea tea) {
         if (tea.isNew()){
+            tea.setRate(0);
             em.persist(tea);
             return tea;
         } else {

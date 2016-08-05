@@ -1,7 +1,5 @@
 package org.glasma.teafriend.model;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -18,7 +16,7 @@ import java.util.List;
 })
 @Entity
 @Table(name = "tea")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Tea extends NamedEntity {
 
     public static final String DELETE = "Tea.delete";
@@ -62,6 +60,13 @@ public class Tea extends NamedEntity {
 
     public Tea(String name, String category, String country, String description){
         this(null, name, category, country, description, 0, 0);
+    }
+
+    public Tea(Integer id, String name, String category, String country, String description) {
+        super(id, name);
+        this.category = category;
+        this.country = country;
+        this.description = description;
     }
 
     public Tea(Integer id, String name, String category, String country, String description, double rate, int countConnoisseurs) {

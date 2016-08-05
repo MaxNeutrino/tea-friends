@@ -19,7 +19,7 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
         @NamedQuery(name = User.BY_EMAIL, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles WHERE u.email=?1"),
-        @NamedQuery(name = User.ALL_SORTED, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles ORDER BY u.name, u.email"),
+        @NamedQuery(name = User.ALL_SORTED, query = "SELECT u FROM User u ORDER BY u.name, u.email"),
 })
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class User extends NamedEntity {
@@ -50,8 +50,8 @@ public class User extends NamedEntity {
 
     @ManyToMany
     @JoinTable(name = "user_wish_tea",
-    joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "tea_id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tea_id", referencedColumnName = "id"))
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Tea> drunkTeaList;
 
@@ -62,7 +62,8 @@ public class User extends NamedEntity {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Tea> wishTeaList;
 
-    public User(){}
+    public User() {
+    }
 
     public User(User u) {
         this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.getRoles());
@@ -72,7 +73,7 @@ public class User extends NamedEntity {
         this(id, user, email, pass, EnumSet.of(role, roles));
     }
 
-    public User(Integer id, String name, String email, String password, Set<Role> roles){
+    public User(Integer id, String name, String email, String password, Set<Role> roles) {
         super(id, name);
         this.email = email;
         this.password = password;

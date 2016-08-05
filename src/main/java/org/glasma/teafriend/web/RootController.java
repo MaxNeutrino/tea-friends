@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 public class RootController {
 
     @Autowired
-    private UserService service;
+    private UserService userService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {
@@ -23,7 +23,7 @@ public class RootController {
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String userList(Model model) {
-        model.addAttribute("userList", service.getAll());
+        model.addAttribute("userList", userService.getAll());
         return "userList";
     }
 
@@ -31,6 +31,12 @@ public class RootController {
     public String setUser(HttpServletRequest request) {
         int userId = Integer.valueOf(request.getParameter("userId"));
         LoggedUser.setId(userId);
-        return "redirect:teas";
+        return "redirect:users";
     }
+
+    /*@RequestMapping(value = "/teas", method = RequestMethod.GET)
+    public String teaList(Model model) {
+        model.addAttribute("teaList", teaService.getAll());
+        return "teaList";
+    }*/
 }
