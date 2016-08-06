@@ -5,14 +5,15 @@ dl {
 }
 
 dt {
-    display: inline-block;
+    display: block;
     width: 170px;
 }
 
 dd {
-    display: inline-block;
+    display: block;
     margin-left: 8px;
     vertical-align: top;
+    padding: 1em;
 }
 
 form section {

@@ -37,7 +37,7 @@ public class JspTeaController extends AbstractTeaController {
         return "teaEdit";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String updateOrCreate(HttpServletRequest request, Model model) {
         String id = request.getParameter("id");
         Tea tea = new Tea(id.isEmpty() ? null : Integer.valueOf(id),
