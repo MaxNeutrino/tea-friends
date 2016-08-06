@@ -21,5 +21,7 @@ public interface TeaService {
 
     Collection<Tea> getFilteredTeaList(String category, String country);
 
+    Collection<Tea> searchByName(String name);
+
     void evictCache();
 }

@@ -13,7 +13,14 @@
 <h2><a href="${pageContext.request.contextPath}/">Home</a></h2>
 <h3>TeaList</h3>
 <jsp:include page="fragments/filterSection.jsp"/>
-<hr>
+<hr/>
+<section>
+    <form method="get" action="${pageContext.request.contextPath}teas/search">
+        <input type="text" name="name"/>
+        <button type="submit"><fmt:message key="common.search"/></button>
+    </form>
+</section>
+<hr/>
 <table border="1" cellpadding="8" cellspacing="0">
     <c:forEach items="${teaList}" var="tea">
         <jsp:useBean id="tea" scope="page" type="org.glasma.teafriend.model.Tea"/>

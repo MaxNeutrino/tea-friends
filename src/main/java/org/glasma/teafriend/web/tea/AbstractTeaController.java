@@ -51,4 +51,9 @@ public class AbstractTeaController {
         return service.getFilteredTeaList(category, country);
     }
 
+    public Collection<Tea> searchTeaByName(String name) {
+        LOG.info("get teas {}", name);
+        return service.searchByName(name);
+    }
+
 }

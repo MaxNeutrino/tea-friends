@@ -69,6 +69,13 @@ public class TeaServiceImpl implements TeaService {
     }
 
     @Override
+    public Collection<Tea> searchByName(String name) {
+        return getAll().stream()
+                .filter(t -> t.getName().toLowerCase().contains(name.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     //@CacheEvict(value = "teas", allEntries = true)
     public void evictCache() {
 
