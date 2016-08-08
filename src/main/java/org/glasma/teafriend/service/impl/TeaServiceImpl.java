@@ -6,7 +6,9 @@ import org.glasma.teafriend.service.TeaService;
 import org.glasma.teafriend.util.exception.ExceptionUtil;
 import org.glasma.teafriend.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -18,19 +20,19 @@ public class TeaServiceImpl implements TeaService {
     TeaRepository repository;
 
     @Override
-    //@CacheEvict(value = "teas", allEntries = true)
+    @CacheEvict(value = "teas", allEntries = true)
     public Tea save(Tea tea) {
         return repository.save(tea);
     }
 
     @Override
-    //@CacheEvict(value = "teas", allEntries = true)
+    @CacheEvict(value = "teas", allEntries = true)
     public void delete(int id) {
         repository.delete(id);
     }
 
     @Override
-    //@CacheEvict(value = "teas", allEntries = true)
+    @CacheEvict(value = "teas", allEntries = true)
     public Tea update(Tea tea) {
         return repository.save(tea);
     }
@@ -46,7 +48,7 @@ public class TeaServiceImpl implements TeaService {
     }
 
     @Override
-    //@Cacheable("teas")
+    @Cacheable("teas")
     public Collection<Tea> getAll() {
         return repository.getAll();
     }
@@ -76,7 +78,7 @@ public class TeaServiceImpl implements TeaService {
     }
 
     @Override
-    //@CacheEvict(value = "teas", allEntries = true)
+    @CacheEvict(value = "teas", allEntries = true)
     public void evictCache() {
 
     }
