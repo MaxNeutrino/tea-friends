@@ -4,7 +4,7 @@ import org.glasma.teafriend.UserTestData;
 import org.glasma.teafriend.model.User;
 import org.glasma.teafriend.repository.UserRepository;
 import org.glasma.teafriend.util.exception.NotFoundException;
-import org.glasma.teafriend.web.User.AdminRestController;
+import org.glasma.teafriend.web.user.AdminRestController;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
