@@ -26,7 +26,7 @@
         <jsp:useBean id="tea" scope="page" type="org.glasma.teafriend.model.Tea"/>
         <p>
             <tr>
-                <td>${tea.name}</td>
+                <td><a href="teas/tea?id=${tea.id}">${tea.name}</a></td>
                 <td>${tea.category}</td>
                 <td>${tea.country}</td>
                 <td>${tea.description}</td>

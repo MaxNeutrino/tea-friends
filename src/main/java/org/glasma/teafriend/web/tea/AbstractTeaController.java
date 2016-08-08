@@ -55,5 +55,4 @@ public class AbstractTeaController {
         LOG.info("get teas {}", name);
         return service.searchByName(name);
     }
-
 }

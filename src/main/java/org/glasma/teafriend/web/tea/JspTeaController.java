@@ -37,6 +37,12 @@ public class JspTeaController extends AbstractTeaController {
         return "teaEdit";
     }
 
+    @RequestMapping(value = "/tea", method = RequestMethod.GET)
+    public String getTea(HttpServletRequest request, Model model) {
+        model.addAttribute("tea", super.get(getId(request)));
+        return "teaInfo";
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String updateOrCreate(HttpServletRequest request, Model model) {
         String id = request.getParameter("id");
@@ -65,7 +71,7 @@ public class JspTeaController extends AbstractTeaController {
     public String getByName (HttpServletRequest request, Model model) {
         String name = request.getParameter("name");
         model.addAttribute("tea", super.getByName(name));
-        return "tea";
+        return "teaInfo";
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
