@@ -1,6 +1,7 @@
 package org.glasma.teafriend.web;
 
 import org.glasma.teafriend.service.TeaService;
+import org.glasma.teafriend.service.UserService;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,9 @@ public class AbstractControllerTest {
     private TeaService teaService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private WebApplicationContext webApplicationContext;
 
     @PostConstruct
@@ -55,5 +59,6 @@ public class AbstractControllerTest {
     @Before
     public void setUp() {
         teaService.evictCache();
+        userService.evictCache();
     }
 }

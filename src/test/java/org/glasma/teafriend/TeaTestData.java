@@ -27,7 +27,7 @@ public class TeaTestData {
             "Ассам Мангалам", "Черный", "Индия", "Очень вкусный", 0, 0);
 
     public final static ModelMatcher<Tea, TestTea> MATCHER = new ModelMatcher<>(
-            t -> ((t instanceof TestTea) ? (TestTea) t : new TestTea(t))
+            t -> ((t instanceof TestTea) ? (TestTea) t : new TestTea(t)), Tea.class
     );
 
     public static class TestTea extends Tea {

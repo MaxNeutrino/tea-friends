@@ -4,7 +4,7 @@ import org.glasma.teafriend.UserTestData;
 import org.glasma.teafriend.model.User;
 import org.glasma.teafriend.repository.UserRepository;
 import org.glasma.teafriend.util.exception.NotFoundException;
-import org.glasma.teafriend.web.user.AdminRestController;
+import org.glasma.teafriend.web.user.AdminUserRestController;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +23,7 @@ import static org.glasma.teafriend.UserTestData.USER;
 public class UserAdminSpringMockTest {
 
     @Autowired
-    private AdminRestController controller;
+    private AdminUserRestController controller;
 
     @Autowired
     private UserRepository repository;

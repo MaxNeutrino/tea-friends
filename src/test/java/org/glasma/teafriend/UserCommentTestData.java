@@ -20,7 +20,7 @@ public class UserCommentTestData {
     );
 
     public static final ModelMatcher<UserComment, TestUserComment> MATCHER = new ModelMatcher<>(
-            c -> ((c instanceof TestUserComment) ? (TestUserComment) c : new TestUserComment(c))
+            c -> ((c instanceof TestUserComment) ? (TestUserComment) c : new TestUserComment(c)), UserComment.class
     );
 
     public static class TestUserComment extends UserComment {

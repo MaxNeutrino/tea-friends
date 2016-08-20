@@ -1,7 +1,7 @@
 package org.glasma.teafriend;
 
 import org.glasma.teafriend.model.Tea;
-import org.glasma.teafriend.web.tea.TeaRestController;
+import org.glasma.teafriend.web.tea.AbstractTeaController;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.util.Arrays;
@@ -14,7 +14,7 @@ public class SpringMain {
             appCtx.refresh();
 
             System.out.println(Arrays.toString(appCtx.getBeanDefinitionNames()));
-            TeaRestController teaRestController = appCtx.getBean(TeaRestController.class);
+            AbstractTeaController teaRestController = appCtx.getBean(AbstractTeaController.class);
             teaRestController.create(new Tea(12, "Молочный оолонг", "Светлый улун", "Китай", "Очень вкусный", 0, 0));
             System.out.println();
         }

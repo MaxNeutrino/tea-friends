@@ -4,7 +4,7 @@ import org.glasma.teafriend.UserTestData;
 import org.glasma.teafriend.model.User;
 import org.glasma.teafriend.repository.UserRepository;
 import org.glasma.teafriend.util.exception.NotFoundException;
-import org.glasma.teafriend.web.user.AdminRestController;
+import org.glasma.teafriend.web.user.AdminUserRestController;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -20,13 +20,13 @@ import static org.glasma.teafriend.UserTestData.USER;
 
 public class AdminTest {
     private static ConfigurableApplicationContext appCtx;
-    private static AdminRestController controller;
+    private static AdminUserRestController controller;
 
     @BeforeClass
     public static void beforeClass() {
         appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
         System.out.println("\n" + Arrays.toString(appCtx.getBeanDefinitionNames()) + "\n");
-        controller = appCtx.getBean(AdminRestController.class);
+        controller = appCtx.getBean(AdminUserRestController.class);
     }
 
     @Before

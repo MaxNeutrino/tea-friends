@@ -17,7 +17,7 @@ public class TeaRateTestData {
     public static final TeaRate ADMIN_TEA_RATE = new TeaRate(ADMIN_TEA_RATE_ID, 5, UserTestData.ADMIN, TeaTestData.ULUN);
 
     public static final ModelMatcher<TeaRate, TestTeaRate> MATCHER = new ModelMatcher<>(
-            tr -> ((tr instanceof TestTeaRate) ? (TestTeaRate) tr : new TestTeaRate(tr))
+            tr -> ((tr instanceof TestTeaRate) ? (TestTeaRate) tr : new TestTeaRate(tr)), TeaRate.class
     );
 
     public static class TestTeaRate extends TeaRate{
