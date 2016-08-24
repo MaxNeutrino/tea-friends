@@ -12,8 +12,6 @@ public interface TeaRepository {
 
     Tea get(int id);
 
-    Collection<Tea> getByName(String name);
-
     Collection<Tea> getAll();
 
     Collection<Tea> getByCategory(String category);

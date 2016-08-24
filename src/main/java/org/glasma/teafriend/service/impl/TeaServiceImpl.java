@@ -16,6 +16,10 @@ import java.util.stream.Collectors;
 @Service
 public class TeaServiceImpl implements TeaService {
 
+    public static final String SORT_ALL = "all";
+
+
+
     @Autowired
     TeaRepository repository;
 
@@ -43,11 +47,6 @@ public class TeaServiceImpl implements TeaService {
     }
 
     @Override
-    public Collection<Tea> getByName(String name) {
-        return repository.getByName(name);
-    }
-
-    @Override
     @Cacheable("teas")
     public Collection<Tea> getAll() {
         return repository.getAll();
@@ -56,14 +55,14 @@ public class TeaServiceImpl implements TeaService {
     @Override
     public Collection<Tea> getFilteredTeaList(String category, String country) {
         Collection<Tea> teaList;
-        if (category.equals("Все"))
+        if (category.equals(SORT_ALL))
             teaList = getAll();
         else
             teaList = getAll().stream()
                     .filter(t -> t.getCategory().equals(category))
                     .collect(Collectors.toList());
 
-        if (!country.equals("Все"))
+        if (!country.equals(SORT_ALL))
             teaList = teaList.stream()
                     .filter(t -> t.getCountry().equals(country))
                     .collect(Collectors.toList());

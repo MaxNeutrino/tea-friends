@@ -67,13 +67,6 @@ public class JspTeaController extends AbstractTeaController {
         return "teaList";
     }
 
-    @RequestMapping(value = "/name", method = RequestMethod.GET)
-    public String getByName (HttpServletRequest request, Model model) {
-        String name = request.getParameter("name");
-        model.addAttribute("tea", super.getByName(name));
-        return "teaInfo";
-    }
-
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchByName(HttpServletRequest request, Model model) {
         String name = request.getParameter("name");

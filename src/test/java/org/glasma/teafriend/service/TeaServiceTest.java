@@ -18,9 +18,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import static org.glasma.teafriend.Profiles.POSTGRES;
+import static org.glasma.teafriend.TeaTestData.*;
+import static org.glasma.teafriend.service.impl.TeaServiceImpl.SORT_ALL;
 
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
@@ -47,7 +48,7 @@ public class TeaServiceTest {
 
     @Test
     public void testSave() {
-        TeaTestData.TestTea tt = new TeaTestData.TestTea("НовыйЧай", "Шен Пуэр", "Китай", "Очень вкусный");
+        TeaTestData.TestTea tt = new TeaTestData.TestTea("НовыйЧай", CATEGORY_SHENG_PUER, "Китай", "Очень вкусный");
         Tea created = service.save(tt.asTea());
         tt.setId(created.getId());
         TeaTestData.MATCHER.assertCollectionEquals(
@@ -74,12 +75,6 @@ public class TeaServiceTest {
         TeaTestData.MATCHER.assertEquals(tea, TeaTestData.WHITE);
     }
 
-    @Test
-    public void testGetByName() {
-        List<Tea> tea = (List<Tea>) service.getByName(TeaTestData.WHITE.getName());
-        TeaTestData.MATCHER.assertEquals(tea.get(0), TeaTestData.WHITE);
-    }
-
     @Test(expected = NotFoundException.class)
     public void testGetNotFound() {
         service.get(1);
@@ -93,14 +88,14 @@ public class TeaServiceTest {
 
     @Test
     public void testGetFilteredByCategory() {
-        Collection<Tea> byCategory = service.getFilteredTeaList(TeaTestData.CATEGORY_WHITE, TeaTestData.CHOICE_ALL);
+        Collection<Tea> byCategory = service.getFilteredTeaList(CATEGORY_WHITE, SORT_ALL);
         TeaTestData.MATCHER.assertCollectionEquals(Collections.singletonList(
                 TeaTestData.WHITE), byCategory);
     }
 
     @Test
     public void testGetFilteredByCountry() {
-        Collection<Tea> byCountry = service.getFilteredTeaList(TeaTestData.CHOICE_ALL, TeaTestData.COUNTRY_INDIA);
+        Collection<Tea> byCountry = service.getFilteredTeaList(SORT_ALL, COUNTRY_INDIA);
         TeaTestData.MATCHER.assertCollectionEquals(Collections.singletonList(
                 TeaTestData.BLACK), byCountry);
     }
@@ -108,7 +103,7 @@ public class TeaServiceTest {
     @Test
     public void testGetFilteredByCategoryAndCountry() {
         Collection<Tea> byCategoryAndCountry = service.getFilteredTeaList(
-                TeaTestData.CATEGORY_WHITE, TeaTestData.COUNTRY_CHINA);
+                CATEGORY_WHITE, COUNTRY_CHINA);
         TeaTestData.MATCHER.assertCollectionEquals(Collections.singletonList(
                 TeaTestData.WHITE), byCategoryAndCountry);
     }

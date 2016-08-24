@@ -14,7 +14,6 @@ import java.util.List;
         @NamedQuery(name = Tea.BY_CATEGORY, query = "SELECT t FROM Tea t WHERE t.category=?1"),
         @NamedQuery(name = Tea.BY_COUNTRY, query = "SELECT t FROM Tea t WHERE t.country=?1"),
         @NamedQuery(name = Tea.ALL_SORTED, query = "SELECT t FROM Tea t ORDER BY t.name"),
-        @NamedQuery(name = Tea.BY_NAME, query = "SELECT t FROM Tea t WHERE t.name=:name"),
 })
 @Entity
 @Table(name = "tea")
