@@ -8,10 +8,21 @@ import java.util.Objects;
 
 public class TeaTestData {
 
-    public final static String CATEGORY_WHITE = "Белый";
-    public final static String COUNTRY_INDIA = "Индия";
-    public final static String COUNTRY_CHINA = "Китай";
-    public final static String CHOICE_ALL = "Все";
+    public static final String CATEGORY_WHITE = "white";
+    public static final String CATEGORY_YELLOW = "yellow";
+    public static final String CATEGORY_GREEN = "green";
+    public static final String CATEGORY_OOLONG = "oolong";
+    public static final String CATEGORY_RED = "red";
+    public static final String CATEGORY_BLACK = "black";
+    public static final String CATEGORY_SHOU_PUER = "shou puer";
+    public static final String CATEGORY_SHENG_PUER = "sheng puer";
+
+    public static final String COUNTRY_CHINA = "china";
+    public static final String COUNTRY_TAIWAN = "taiwan";
+    public static final String COUNTRY_INDIA = "india";
+    public static final String COUNTRY_CEYLON = "ceylon";
+    public static final String COUNTRY_TURKEY = "turkey";
+    public static final String COUNTRY_GEORGIA = "georgia";
 
     public static final int WHITE_TEA_ID = BaseEntity.START_SEQ + 2;
 
@@ -20,11 +31,11 @@ public class TeaTestData {
     public static final int BLACK_TEA_ID = BaseEntity.START_SEQ + 4;
 
     public static final Tea WHITE = new Tea(WHITE_TEA_ID,
-            "Баймаохоу", "Белый", "Китай", "Очень вкусный", 0, 0);
+            "Баймаохоу", CATEGORY_WHITE, COUNTRY_CHINA, "Очень вкусный", 0, 0);
     public static final Tea ULUN = new Tea(ULUN_TEA_ID,
-            "Молочный улун", "Светлый улун", "Китай", "Очень вкусный", 0, 2);
+            "Молочный улун", CATEGORY_OOLONG, COUNTRY_CHINA, "Очень вкусный", 0, 2);
     public static final Tea BLACK = new Tea(BLACK_TEA_ID,
-            "Ассам Мангалам", "Черный", "Индия", "Очень вкусный", 0, 0);
+            "Ассам Мангалам", CATEGORY_BLACK, COUNTRY_INDIA, "Очень вкусный", 0, 0);
 
     public final static ModelMatcher<Tea, TestTea> MATCHER = new ModelMatcher<>(
             t -> ((t instanceof TestTea) ? (TestTea) t : new TestTea(t)), Tea.class
