@@ -4,12 +4,10 @@ import org.glasma.teafriend.LoggerWrapper;
 import org.glasma.teafriend.model.Tea;
 import org.glasma.teafriend.service.TeaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
 import java.util.Collection;
 
-@Controller
-public class AbstractTeaController {
+public abstract class AbstractTeaController {
     protected static final LoggerWrapper LOG = LoggerWrapper.get(AbstractTeaController.class);
 
     @Autowired
@@ -39,11 +37,6 @@ public class AbstractTeaController {
     public Tea create(Tea tea) {
         LOG.info("create {}", tea);
         return service.save(tea);
-    }
-
-    public Collection<Tea> getByName(String name) {
-        LOG.info("get teas {}", name);
-        return service.getByName(name);
     }
 
     public Collection<Tea> getFilteredList(String category, String country) {
