@@ -14,12 +14,9 @@ INSERT INTO user_roles (role, user_id) VALUES ('ROLE_USER', 100000);
 INSERT INTO user_roles (role, user_id) VALUES ('ROLE_ADMIN', 100001);
 
 INSERT INTO tea (name, category, country, description, rate, count_connoisseurs) VALUES
-  ('Баймаохоу', 'White', 'China', 'Очень вкусный', 0, 0),
-  ('Молочный улун', 'Oolong', 'Taiwan',
-   'Очень вкусный, для тестов приходиться писать много чепухи и наверное добавлять больше чая.', 0, 2),
-  ('Ассам Мангалам', 'Black', 'India', 'Очень вкусный', 0, 0),
-  ('Баймудань', 'White', 'China', 'Напиток богов, особенно холодный', 0, 0),
-  ('Чжао Чжоу Ча', 'Oolong', 'China', 'Очень вкусный', 0, 0);
+  ('Баймаохоу', 'white', 'china', 'Очень вкусный', 0, 0),
+  ('Молочный улун', 'oolong', 'china', 'Очень вкусный', 0, 2),
+  ('Ассам Мангалам', 'black', 'india', 'Очень вкусный', 0, 0);
 
 INSERT INTO comments (created, message, user_id, tea_id) VALUES
   ('2016-06-12 10:00:00', 'Это жемчужина чаев', '100000', '100003'),

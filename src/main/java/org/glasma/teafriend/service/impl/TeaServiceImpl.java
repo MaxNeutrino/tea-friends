@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class TeaServiceImpl implements TeaService {
 
-    public static final String SORT_ALL = "all";
+    public static final String SORT_ALL = "All";
 
 
 
