@@ -1,34 +1,30 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%--<div class="mdl-grid filter-fixed">--%>
 
-    <div class="mdl-card<%-- mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--4-col-phone--%> mdl-shadow--2dp">
-        <form method="post" action="${pageContext.request.contextPath}teas/filter">
-            <div class="mdl-card__supporting-text">
+<form method="post" action="${pageContext.request.contextPath}teas/filter">
 
-                <div class="mdl-card__title">
-                    <h3 class="mdl-card__title-text">Category</h3>
-                </div>
-                <div class="mdl-card__supporting-text left-text">
-                    <jsp:include page="teaCategoryOptions.jsp"/>
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                    <div class="mdl-card__title">
-                        <h3 class="mdl-card__title-text">Country</h3>
-                    </div>
-                    <div class="mdl-card__supporting-text left-text">
-                        <jsp:include page="teaCountryOptions.jsp"/>
-                    </div>
-                </div>
-                <div class="mdl-card__actions mdl-card--border centered-text">
-                    <button type="submit"
-                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                        Filter
-                    </button>
-                </div>
-            </div>
-        </form>
+    <h3 class="mdl-dialog__title">Category</h3>
+    <div class="mdl-dialog__content">
+        <p>
+            <jsp:include page="teaCategoryOptions.jsp"/>
+        </p>
     </div>
-<%--</div>--%>
+
+    <h3 class="mdl-dialog__title">Country</h3>
+    <div class="mdl-dialog__content">
+        <jsp:include page="teaCountryOptions.jsp"/>
+    </div>
+
+    <div class="mdl-dialog__actions centered-text">
+        <button type="button"
+                class="mdl-button  mdl-js-button mdl-button--raised mdl-js-ripple-effect close">
+            Close
+        </button>
+        <button type="submit"
+                class="mdl-button  mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            Filter
+        </button>
+    </div>
+</form>
 

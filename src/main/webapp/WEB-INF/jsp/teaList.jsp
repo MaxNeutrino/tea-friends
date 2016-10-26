@@ -6,6 +6,8 @@
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
+
+
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
     <jsp:include page="fragments/headerLoggedUser.jsp"/>
@@ -14,7 +16,8 @@
 
     <main class="mdl-layout__content">
         <div class="page-content">
-            <div class="mdl-grid grid-adds">
+
+            <div class="mdl-grid grid-adds" id="datacards">
                 <%--<jsp:include page="fragments/filterSection.jsp"/>--%>
 
                 <c:forEach items="${teaList}" var="tea">
@@ -48,8 +51,16 @@
                                 <li class="mdl-menu__item wish">
                                     <i class="material-icons">playlist_add</i> Add to wish
                                 </li>
-                                <li disabled class="mdl-menu__item delete" is="disabled">
+                                <li class="mdl-menu__item">
                                     <i class="material-icons">delete</i> Delete from list
+                                </li>
+                                    <%--ADMIN ONLY--%>
+                                <li class="mdl-menu__item">
+                                    <i class="material-icons">create</i> Update
+                                </li>
+                                    <%--ADMIN ONLY--%>
+                                <li class="mdl-menu__item">
+                                    <i class="material-icons">delete</i> Remove
                                 </li>
                                 <li class="mdl-menu__item">
                                     <i class="material-icons">share</i> Share
@@ -81,24 +92,98 @@
                 <% } %>
             </div>
 
-            <div id="fab-adds" class="mdl-speed-dial mdl-speed-dial--bottom-fixed">
-                <%--<div class="mdl-speed-dial__options">
+            <%--ADMIN FAB--%>
+            <div class="mdl-speed-dial speed-dial--header-edge mdl-layout--large-screen-only" id="fab-adds-admin">
+                <div class="mdl-speed-dial__options">
                     <div class="mdl-speed-dial__option">
-                        &lt;%&ndash;<p class="mdl-speed-dial__tooltip">&ndash;%&gt;
-                        <jsp:include page="fragments/filterSection.jsp"/>
-                        &lt;%&ndash;</p>&ndash;%&gt;
+                        <p class="mdl-speed-dial__tooltip">Add tea</p>
+                        <a href="#" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
+                            <i class="material-icons">add</i>
+                        </a>
                     </div>
-                </div>--%>
+                </div>
+                <button class="mdl-speed-dial__main-fab mdl-speed-dial__main-fab--spin mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                    <i class="material-icons mdl-speed-dial_main-fab-icon mdl-speed-dial_main-fab-icon--primary">add</i>
+                    <i class="material-icons mdl-speed-dial_main-fab-icon mdl-speed-dial_main-fab-icon--secondary">create</i>
+                </button>
+            </div>
+
+            <div class="mdl-speed-dial mdl-speed-dial--bottom-fixed" id="fab-adds-bottom">
                 <%--<form method="get" action="/teas/create">--%>
-                    <button class="mdl-speed-dial__main-fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-                        <i class="material-icons mdl-speed-dial_main-fab-icon">filter_list</i>
-                    </button>
+                <button class="mdl-speed-dial__main-fab  show-modal mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                    <i class="material-icons mdl-speed-dial_main-fab-icon">filter_list</i>
+                </button>
                 <%--</form>--%>
             </div>
+            <button type="button" class="mdl-button">Show Modal</button>
             <jsp:include page="fragments/footer.jsp"/>
         </div>
     </main>
 </div>
 
+
+<dialog class="mdl-dialog">
+    <jsp:include page="fragments/filterSection.jsp"/>
+</dialog>
+<script>
+    var dialog = document.querySelector('dialog');
+    var showModalButton = document.querySelector('.show-modal');
+    if (!dialog.showModal) {
+        dialogPolyfill.registerDialog(dialog);
+    }
+    showModalButton.addEventListener('click', function () {
+        dialog.showModal();
+    });
+    dialog.querySelector('.close').addEventListener('click', function () {
+        dialog.close();
+    });
+</script>
+
 </body>
+<script type="text/javascript">
+    var ajaxUrl = 'ajax/admin/teas/';
+    var datatableApi;
+
+    function updateTable() {
+        $.get(ajaxUrl, function (data) {
+            updateTableByData(data);
+        });
+    }
+    $(function () {
+        datatableApi = $('#datacards').DataTable({
+            "bPaginate": false,
+            "bInfo": false,
+            "aoColumns": [
+                {
+                    "mData": "name"
+                },
+                {
+                    "mData": "description"
+                },
+                {
+                    "mData": "country"
+                },
+                {
+                    "mData": "category"
+                }
+            ],
+            "aaSorting": [
+                [
+                    0,
+                    "asc"
+                ]
+            ]
+        });
+        makeEditable();
+        init();
+    });
+
+    function init() {
+        $(':checkbox').each(function () {
+            if (!$(this).is(":checked")) {
+                $(this).closest('tr').css("text-decoration", "line-through");
+            }
+        });
+    }
+</script>
 </html>

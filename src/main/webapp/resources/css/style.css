@@ -22,8 +22,17 @@
     padding-bottom: 1em;
 }
 
-#fab-adds {
+#fab-adds-bottom {
     position: fixed;
+}
+
+#fab-adds-admin {
+    position: fixed;
+}
+
+.speed-dial--header-edge {
+    bottom: 98px;
+    right: 40px;
 }
 
 #logo {
