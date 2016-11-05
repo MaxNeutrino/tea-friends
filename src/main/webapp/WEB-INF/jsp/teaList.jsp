@@ -44,22 +44,23 @@
                                 <i class="material-icons">add</i>
                             </button>
                             <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                                for="${tea.name}-${tea.id}">
+                                for="${tea.name}-${tea.id}"
+                                idtea="${tea.id}" id="query">
                                 <li class="mdl-menu__item drunk">
                                     <i class="material-icons">done</i> Add to drunk
                                 </li>
                                 <li class="mdl-menu__item wish">
                                     <i class="material-icons">playlist_add</i> Add to wish
                                 </li>
-                                <li class="mdl-menu__item">
+                                <li class="mdl-menu__item  delete">
                                     <i class="material-icons">delete</i> Delete from list
                                 </li>
                                     <%--ADMIN ONLY--%>
-                                <li class="mdl-menu__item">
-                                    <i class="material-icons">create</i> Update
+                                <li class="mdl-menu__item" onclick="showEditDialog('${tea.name}', '${tea.category}', '${tea.country}', '${tea.description}', ${tea.id})">
+                                    <i class="material-icons edit">create</i> Edit
                                 </li>
                                     <%--ADMIN ONLY--%>
-                                <li class="mdl-menu__item">
+                                <li class="mdl-menu__item" id="removefrom" onclick="deleteTea(${tea.id})">
                                     <i class="material-icons">delete</i> Remove
                                 </li>
                                 <li class="mdl-menu__item">
@@ -97,9 +98,10 @@
                 <div class="mdl-speed-dial__options">
                     <div class="mdl-speed-dial__option">
                         <p class="mdl-speed-dial__tooltip">Add tea</p>
-                        <a href="#" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
+                        <button class="mdl-button show-modal-edit mdl-js-button mdl-button--fab mdl-button--mini-fab"
+                                id="add">
                             <i class="material-icons">add</i>
-                        </a>
+                        </button>
                     </div>
                 </div>
                 <button class="mdl-speed-dial__main-fab mdl-speed-dial__main-fab--spin mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
@@ -109,81 +111,73 @@
             </div>
 
             <div class="mdl-speed-dial mdl-speed-dial--bottom-fixed" id="fab-adds-bottom">
-                <%--<form method="get" action="/teas/create">--%>
-                <button class="mdl-speed-dial__main-fab  show-modal mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                <button class="mdl-speed-dial__main-fab  show-modal-filter mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                     <i class="material-icons mdl-speed-dial_main-fab-icon">filter_list</i>
                 </button>
-                <%--</form>--%>
             </div>
-            <button type="button" class="mdl-button">Show Modal</button>
             <jsp:include page="fragments/footer.jsp"/>
         </div>
     </main>
 </div>
 
+<jsp:include page="fragments/filterSection.jsp"/>
+<jsp:include page="fragments/teaEdit.jsp"/>
 
-<dialog class="mdl-dialog">
-    <jsp:include page="fragments/filterSection.jsp"/>
-</dialog>
 <script>
-    var dialog = document.querySelector('dialog');
-    var showModalButton = document.querySelector('.show-modal');
-    if (!dialog.showModal) {
-        dialogPolyfill.registerDialog(dialog);
+
+    var dialogFilter = document.getElementById('filter');
+    var showModalButtonFilter = document.querySelector('.show-modal-filter');
+
+    var dialogEdit = document.getElementById('edit-dialog');
+    var showModalButtonEdit = document.querySelector('.show-modal-edit');
+
+    if (!dialogFilter.showModal) {
+        dialogPolyfill.registerDialog(dialogFilter);
     }
-    showModalButton.addEventListener('click', function () {
-        dialog.showModal();
+    showModalButtonFilter.addEventListener('click', function () {
+        dialogFilter.showModal();
     });
-    dialog.querySelector('.close').addEventListener('click', function () {
-        dialog.close();
+    dialogFilter.querySelector('.close').addEventListener('click', function () {
+        dialogFilter.close();
     });
+
+    if (!dialogEdit.showModal) {
+        dialogPolyfill.registerDialog(dialogEdit);
+    }
+    showModalButtonEdit.addEventListener('click', function () {
+        document.getElementById("title-edit-dialog").innerHTML = "Add tea";
+        $("#edit-dialog-button").text("Add");
+        $("#edit-tea-name").val('');
+        /*$("#category option:selected").prop('selected', false);
+        $("#country option:selected").prop('selected', false);*/
+        $("#edit-tea-description").val('');
+        $("#edit-tea-id").val(0);
+
+        dialogEdit.showModal();
+    });
+    dialogEdit.querySelector('.close').addEventListener('click', function () {
+        dialogEdit.close();
+    });
+
+    function showEditDialog(teaname, teacategory, teacountry, teadescription, teaid) {
+        $("#title-edit-dialog").text("Edit tea");
+        $("#edit-dialog-button").text("Edit");
+
+        $("#edit-tea-name").val(teaname);
+
+        $("#category option:selected").prop('selected', false);
+        $("#" + teacategory).prop('selected', true);
+
+        $("#country option:selected").prop('selected', false);
+        $("#" + teacountry).prop('selected', true);
+
+        $("#edit-tea-description").val(teadescription);
+        $("#edit-tea-id").val(teaid);
+
+        dialogEdit.showModal();
+    }
+
 </script>
 
 </body>
-<script type="text/javascript">
-    var ajaxUrl = 'ajax/admin/teas/';
-    var datatableApi;
-
-    function updateTable() {
-        $.get(ajaxUrl, function (data) {
-            updateTableByData(data);
-        });
-    }
-    $(function () {
-        datatableApi = $('#datacards').DataTable({
-            "bPaginate": false,
-            "bInfo": false,
-            "aoColumns": [
-                {
-                    "mData": "name"
-                },
-                {
-                    "mData": "description"
-                },
-                {
-                    "mData": "country"
-                },
-                {
-                    "mData": "category"
-                }
-            ],
-            "aaSorting": [
-                [
-                    0,
-                    "asc"
-                ]
-            ]
-        });
-        makeEditable();
-        init();
-    });
-
-    function init() {
-        $(':checkbox').each(function () {
-            if (!$(this).is(":checked")) {
-                $(this).closest('tr').css("text-decoration", "line-through");
-            }
-        });
-    }
-</script>
 </html>

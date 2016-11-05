@@ -16,6 +16,7 @@
     <!-- Material Design fonts -->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
     <link rel="stylesheet" href="resources/plugins/mdl-speed-dial/mdl-speed-dial.css">
     <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.teal-amber.min.css" />
     <link rel="stylesheet" type="text/css" href="../resources/plugins/dialog-polyfill/dialog-polyfill.css">

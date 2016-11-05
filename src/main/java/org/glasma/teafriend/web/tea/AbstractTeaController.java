@@ -5,7 +5,9 @@ import org.glasma.teafriend.model.Tea;
 import org.glasma.teafriend.service.TeaService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
+import java.util.Objects;
 
 public abstract class AbstractTeaController {
     protected static final LoggerWrapper LOG = LoggerWrapper.get(AbstractTeaController.class);
@@ -47,5 +49,10 @@ public abstract class AbstractTeaController {
     public Collection<Tea> searchTeaByName(String name) {
         LOG.info("get teas {}", name);
         return service.searchByName(name);
+    }
+
+    protected int getId(HttpServletRequest request) {
+        String paramId = Objects.requireNonNull(request.getParameter("id"));
+        return Integer.valueOf(paramId);
     }
 }

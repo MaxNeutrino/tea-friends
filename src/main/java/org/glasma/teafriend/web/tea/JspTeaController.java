@@ -1,13 +1,11 @@
 package org.glasma.teafriend.web.tea;
 
-import org.glasma.teafriend.model.Tea;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/teas")
@@ -19,45 +17,12 @@ public class JspTeaController extends AbstractTeaController {
         return "teaList";
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String delete(HttpServletRequest request) {
-        super.delete(getId(request));
-        return "redirect:/teas";
-    }
-
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public String editForUpdate(HttpServletRequest request, Model model) {
-        model.addAttribute("tea", super.get(getId(request)));
-        return "teaEdit";
-    }
-
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String editForCreate(Model model) {
-        model.addAttribute("tea", new Tea());
-        return "teaEdit";
-    }
-
-    @RequestMapping(value = "/tea", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/tea", method = RequestMethod.GET)
     public String getTea(HttpServletRequest request, Model model) {
         model.addAttribute("tea", super.get(getId(request)));
         return "teaInfo";
-    }
+    }*/
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String updateOrCreate(HttpServletRequest request, Model model) {
-        String id = request.getParameter("id");
-        Tea tea = new Tea(id.isEmpty() ? null : Integer.valueOf(id),
-                request.getParameter("name"),
-                request.getParameter("category"),
-                request.getParameter("country"),
-                request.getParameter("description"));
-        if (tea.isNew()) {
-            super.create(tea);
-        } else {
-            super.update(tea);
-        }
-        return "redirect:/teas";
-    }
 
     @RequestMapping(value = "/filter", method = RequestMethod.POST)
     public String getFilteredList (HttpServletRequest request, Model model) {
@@ -72,10 +37,5 @@ public class JspTeaController extends AbstractTeaController {
         String name = request.getParameter("name");
         model.addAttribute("teaList", super.searchTeaByName(name));
         return "teaList";
-    }
-
-    private int getId(HttpServletRequest request) {
-        String paramId = Objects.requireNonNull(request.getParameter("id"));
-        return Integer.valueOf(paramId);
     }
 }

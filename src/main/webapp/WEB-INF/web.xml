@@ -37,6 +37,15 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <!-- Spring Security -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -53,30 +62,4 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <!--<servlet>
-        <servlet-name>teaServlet</servlet-name>
-        <servlet-class>org.glasma.teafriend.web.TeaServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>teaServlet</servlet-name>
-        <url-pattern>/tea</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>userServlet</servlet-name>
-        <servlet-class>org.glasma.teafriend.web.UserServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>userServlet</servlet-name>
-        <url-pattern>/user</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>userTeaServlet</servlet-name>
-        <servlet-class>org.glasma.teafriend.web.UserTeaServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>userTeaServlet</servlet-name>
-        <url-pattern>/usertea</url-pattern>
-    </servlet-mapping>-->
 </web-app>
